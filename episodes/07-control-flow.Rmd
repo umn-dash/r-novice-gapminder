@@ -1,6 +1,6 @@
 ---
 title: Control Flow
-teaching: 45
+teaching: 40
 exercises: 20
 source: Rmd
 ---

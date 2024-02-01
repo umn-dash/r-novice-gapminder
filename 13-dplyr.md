@@ -28,7 +28,7 @@ do these operations using the normal base R operations:
 
 
 ```r
-mean(gapminder[gapminder$continent == "Africa", "gdpPercap"])
+mean(gapminder$gdpPercap[gapminder$continent == "Africa"])
 ```
 
 ```{.output}
@@ -36,7 +36,7 @@ mean(gapminder[gapminder$continent == "Africa", "gdpPercap"])
 ```
 
 ```r
-mean(gapminder[gapminder$continent == "Americas", "gdpPercap"])
+mean(gapminder$gdpPercap[gapminder$continent == "Americas"])
 ```
 
 ```{.output}
@@ -44,7 +44,7 @@ mean(gapminder[gapminder$continent == "Americas", "gdpPercap"])
 ```
 
 ```r
-mean(gapminder[gapminder$continent == "Asia", "gdpPercap"])
+mean(gapminder$gdpPercap[gapminder$continent == "Asia"])
 ```
 
 ```{.output}
@@ -653,10 +653,10 @@ lifeExp_2countries_bycontinents <- gapminder %>%
 
 ## Other great resources
 
-- [R for Data Science](https://r4ds.had.co.nz/)
-- [Data Wrangling Cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
-- [Introduction to dplyr](https://dplyr.tidyverse.org/)
-- [Data wrangling with R and RStudio](https://www.rstudio.com/resources/webinars/data-wrangling-with-r-and-rstudio/)
+- [R for Data Science](https://r4ds.hadley.nz/) (online book)
+- [Data Wrangling Cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) (pdf file)
+- [Introduction to dplyr](https://dplyr.tidyverse.org/) (online documentation)
+- [Data wrangling with R and RStudio](https://www.rstudio.com/resources/webinars/data-wrangling-with-r-and-rstudio/) (online video)
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 

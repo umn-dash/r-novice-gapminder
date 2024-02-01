@@ -120,7 +120,7 @@ Until now, we've been using the nicely formatted original gapminder dataset, but
 'real' data (i.e. our own research data) will never be so well organized. Here
 let's start with the wide formatted version of the gapminder dataset.
 
-> Download the wide version of the gapminder data from [here](data/gapminder_wide.csv)
+> Download the wide version of the gapminder data from [this link to a csv file](data/gapminder_wide.csv)
 > and save it in your data folder.
 
 We'll load the data file and look at it. Note: we don't want our continent and
@@ -589,10 +589,10 @@ There and back again!
 
 ## Other great resources
 
-- [R for Data Science](https://r4ds.had.co.nz/index.html)
-- [Data Wrangling Cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
-- [Introduction to tidyr](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html)
-- [Data wrangling with R and RStudio](https://www.rstudio.com/resources/webinars/data-wrangling-with-r-and-rstudio/)
+- [R for Data Science](https://r4ds.hadley.nz/) (online book)
+- [Data Wrangling Cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) (pdf file)
+- [Introduction to tidyr](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) (online documentation)
+- [Data wrangling with R and RStudio](https://www.rstudio.com/resources/webinars/data-wrangling-with-r-and-rstudio/) (online video)
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 

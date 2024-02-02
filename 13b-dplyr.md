@@ -1,0 +1,654 @@
+---
+title: Data Frame Manipulation with dplyr
+teaching: 30
+exercises: 15
+source: Rmd
+---
+
+::: objectives
+-   SUBSET a data set to a specific subset of rows and/or columns.
+-   SORT or RENAME columns.
+-   MAKE NEW COLUMNS, perhaps using old columns as inputs.
+-   Generate SUMMARIES of our data set.
+-   Use PIPES to string multiple operations on the same data set together.
+:::
+
+::: questions
+-   What are the most common types of operations performed on data sets?
+-   How can you perform these operations efficiently and clearly?
+:::
+
+## Preparation and setup
+
+Note: This lesson uses the **gapminder data set**. This data set can be downloaded [here](https://drive.google.com/file/d/1sBkIJlC_6fImNZhyV0XfsllyUD-hSmoS/view?usp=sharing). Make sure to load the data set into your global environment before continuing.
+
+
+```r
+gap = read.csv("gapminder.csv", header = TRUE)
+```
+
+```{.warning}
+Warning in file(file, "rt"): cannot open file 'gapminder.csv': No such file or
+directory
+```
+
+```{.error}
+Error in file(file, "rt"): cannot open the connection
+```
+
+Also, this lesson will revolve around use of the optional "add-on" package `dplyr`. `dplyr` is a package in the "tidyverse"--an array of useful tools that are designed to look similar and work well together and that make R much more powerful to use but also a lot different than "Base R." Everything we do in this lesson can be done in "Base R" instead, but it won't (typically) be as efficient, easy, or clear!
+
+`dplyr`, like many add-on packages, is **not** installed with R. So, we must install it before we can use it:
+
+
+```r
+install.packages("dplyr") #Only run once!
+```
+
+You only need to install a package once, so there's no need to run the above command more than once. However, packages are updated occasionally. When updates are available, you can re-install new versions using the same `install.packages()` function.
+
+Once a package is installed, it still isn't "turned on" by default. So, to turn on `dplyr` so that we can access its unique features, we use the `library()` function:
+
+
+```r
+library(dplyr)
+```
+
+```{.output}
+
+Attaching package: 'dplyr'
+```
+
+```{.output}
+The following objects are masked from 'package:stats':
+
+    filter, lag
+```
+
+```{.output}
+The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union
+```
+
+The above command must be run every time you start up a new session of R and want access to `dplyr`'s features!
+
+## Introduction
+
+R users work with data frames A LOT...like, *a lot*. When working with data frames, we very often find ourselves wanting to perform a few specific actions, such as cutting certain rows or columns, renaming columns, or transforming columns into new ones.
+
+We can do ALL of those things in "Base R" if we wanted to, and we've already seen ways to do some of those things in previous lessons! However, `dplyr` makes doing all these things easier, more concise, AND more intuitive. It does this by adding specific "verbs" (functions) that have a consistent syntax and structure (as well as intuitive names) and by allowing us to write our code in connected "sentences" using those verbs so that more things can happen in a single command without that command also getting harder to read.
+
+In this lesson, we'll go through each of these commands, showing their individual uses for examining and manipulating the gapminder data set:
+
+
+```r
+head(gap) #To remind us what the columns are called and what data are contained in this data set
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap' not found
+```
+
+## SELECT and RENAME
+
+What if we only wanted a subset of the columns in a data set? The `dplyr` verb corresponding to this desire is `select()`.
+
+**Important**: Every verb in `dplyr`, such as `select()`, takes as its first input the data frame you are trying to manipulate. After that first input, every *subsequent* input you provide becomes another "thing" you want the function to do to that data frame. What I mean by that last part will hopefully become more clear with an example.
+
+Suppose I wanted a version of the gapminder data set that included only the `country` and `year` columns. I could use `select()` to achieve that desire like this:
+
+
+```r
+gap_shrunk = select(gap, #The first input is ALWAYS the data frame to be manipulated.
+               country, year) #All the rest of the inputs become "things to do". Here, that's specific columns to select, referenced by name.
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap' not found
+```
+
+```r
+head(gap_shrunk)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap_shrunk' not found
+```
+
+In the example above, I provided my data frame as the first input to `select()` and all the columns I wanted to *select* as subsequent inputs. As a result, I ended up with a shrunken version of the original data set, one that contains only those two columns.
+
+In the indexing lesson, we learned some "tricks" that work with `select()` too. For example, you can select a sequence of columns that are consecutive by using the `:` operator and the names of the first and last columns in that sequence like so:
+
+
+```r
+gap_sequence = select(gap, 
+                      pop:lifeExp) 
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap' not found
+```
+
+```r
+head(gap_sequence)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap_sequence' not found
+```
+
+We can also use the `-` operator to instead specify columns we want to *reject* instead of keep. For example, to retain every column *except* the `year` column, we could do this:
+
+
+```r
+gap_noyear = select(gap, 
+                    -year)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap' not found
+```
+
+```r
+head(gap_noyear)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap_noyear' not found
+```
+
+We can also use `select()` to *rearrange* columns by specifying the column names in the new order we want them to be in:
+
+
+```r
+gap_reordered = select(gap, 
+                       year, country)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap' not found
+```
+
+```r
+head(gap_reordered)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap_reordered' not found
+```
+
+What if wanted to rename some of our columns? The `dplyr` verb corresponding to this goal is `rename()`.
+
+As with `select()` (and all `dplyr` verbs), `rename()`'s first input is the data frame we're manipulating. Each subsequent input needs to be an "instructions list," with the new name to the left of an `=` operator and the old column name to the right of it (what I like to call *"new = old" format*).
+
+For example, to rename the `pop` column to "population," which I would personally find more intuitive, we would do the following:
+
+
+```r
+gap_renamed = rename(gap, 
+                     population = pop) #New = old format
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap' not found
+```
+
+```r
+head(gap_renamed)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap_renamed' not found
+```
+
+It's as simple as that! If we wanted to rename multiple columns, we could just add more subsequent inputs to the same `rename()` call.
+
+## The magic of pipes
+
+::: challenge
+What if I wanted to *first* eliminate some columns and *then* rename some of the remaining columns? How would you go about doing that?
+
+::: solution
+Your *first* impulse might be to do this in two distinct commands, saving *intermediate objects* after each step, like so:
+
+
+```r
+gap_selected = select(gap, 
+                      country:pop)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap' not found
+```
+
+```r
+gap_remonikered = rename(gap_selected, 
+               population = pop)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap_selected' not found
+```
+
+```r
+head(gap_remonikered)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap_remonikered' not found
+```
+:::
+:::
+
+There's **nothing** *wrong* with this approach, but it's a little...tedious. Plus, if you don't pick really good names for each *intermediate object*, it can get confusing and hard for you and others to follow along with.
+
+I hope you're thinking "I bet there's an easier way." And there is! We can combine these two discrete steps into one easy-to-read "sentence." The only catch is we have to use a strange operator called a *pipe* to do it.
+
+`dplyr` pipes look like this: `%>%`. On Windows, the hotkey to render a pipe is control + shift + M, in case you'd rather type that then "%\>%"! On Mac, it's similar: Command + shift + M.
+
+Pipes may look a little funny, but they do something *really* cool. They take the "thing" produced on their left (once all the operations over there are complete) and "pump" that thing into the operations on their right, specifically into the first available input slot.
+
+This is easier to explain with an example, so let's see how to use pipes to perform the two operations we did above in a single command.
+
+
+```r
+gap.final = gap %>% 
+  select(country:pop) %>% 
+  rename(population = pop) 
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap' not found
+```
+
+```r
+head(gap.final)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap.final' not found
+```
+
+The command above says: "Take the `gap` data set and pump it into `select()`'s first input slot (where it belongs anyway). Then, do `select()`'s operations (which yield a new, manipulated data set) and pump *that* resulting data set into `rename()`'s first input slot. Then, when all that's done, save the result into an object called `gap.final`."
+
+Hopefully, you can see how this might be easier to read and follow along with and also be more efficient! It also explains why every `dplyr` verb's first input slot is the data frame to be manipulated--it makes every verb ready to receive inputs from "upstream" via a pipe!
+
+## FILTER, ARRANGE, and MUTATE
+
+What if we only wanted to look at the data from a specific continent or a specific time span (i.e., we want just specific rows)? The `dplyr` verb corresponding to this action is `filter()` (see, I said the verbs have intuitive names!).
+
+Each input given to `filter()` past the first (which is ALWAYS the data frame to be manipulated, as we've firmly established) is a *logical rule*, which is something we've seen before (e.g., when studying `if()`). Here, each *logical rule* will consist of the name of the column we'll check the values of, a *logical operator* (like `==` or `<=`), and a "threshold" to check against. If **all** the *logical rules* given for a particular row pass, we keep that row. Otherwise, we remove it from the new data frame we create.
+
+For example, here's how we'd filter our data set to just rows where the value in the `continent` column is **exactly** `Europe`:
+
+
+```r
+gap_europe = gap %>% 
+  filter(continent == "Europe") #The column to check values in, a logical operator, and the "value for comparison."
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap' not found
+```
+
+```r
+head(gap_europe)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap_europe' not found
+```
+
+As another example, here's how we'd filter our data set to just rows with data from before the year `1975`:
+
+
+```r
+gap_pre1975 = gap %>% 
+  filter(year < 1975)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap' not found
+```
+
+```r
+head(gap_pre1975)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap_pre1975' not found
+```
+
+::: challenge
+What if we wanted data only from *between* the years 1970 and 1979? How would you achieve this goal using `filter()`? Hint: There are *at least* three ways you should be able to think of!
+
+::: solution
+Here are three different solutions. In the first, we use the `&` (and) operator to specify two rules that a value in the `year` column must satisfy:
+
+
+```r
+and_option = gap %>% 
+  filter(year > 1969 & year < 1980)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap' not found
+```
+
+However, I explained earlier that, with `filter()`, every input past the first is a *logical rule* a row must satisfy for that row to be kept. So, a comma between *logical rules* here is just as good as `&` is:
+
+
+```r
+comma_option = gap %>% 
+  filter(year > 1969, year < 1980)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap' not found
+```
+
+Or, if you would prefer it, you can always just stack multiple `filter()` calls back to back:
+
+
+```r
+stacked_option = gap %>% 
+  filter(year > 1969) %>% 
+  filter(year < 1980)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap' not found
+```
+
+There's nothing right or wrong with any of these options, so which do you prefer? Why?
+:::
+:::
+
+::: challenge
+**Important**: When chaining dplyr verbs together, order matters! Why does the following code fail when we try to run it?
+
+
+```r
+this_will_fail = gap %>% 
+  select(pop:lifeExp) %>% 
+  filter(year < 1975)
+```
+
+::: solution
+Recall that the `year` column is not one of the columns that exists in between the `pop` and `lifeExp` columns. So, the `year` column gets cuts by the `select()` call here *before* we get to the `filter()` call, so the `filter()` call then can't find that column to use it.
+
+Considering that `dplyr` "sentences" can get long and complicated, it's good to remember to be thoughtful about the order you specify actions in!
+:::
+:::
+
+What if we wanted to *sort* our data set by the values in one or more columns? The `dplyr` verb for this desire is `arrange()`.
+
+Every input past the first given to `arrange()` is a column we want to sort by, with columns provided earlier taking "precedence" in the sorting over later ones.
+
+For example, here's how we'd sort our data set by the `lifeExp` column:
+
+
+```r
+gap_sorted = gap %>% 
+  arrange(lifeExp)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap' not found
+```
+
+```r
+head(gap_sorted)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap_sorted' not found
+```
+
+This sorts the data in ascending order by default. If we want to reverse the sorting, we can use the `desc()` function:
+
+
+```r
+gap_sorted_down = gap %>% 
+  arrange(desc(lifeExp))
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap' not found
+```
+
+```r
+head(gap_sorted_down)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap_sorted_down' not found
+```
+
+::: challenge
+I mentioned above that you can provide multiple inputs to `arrange()`, but it's a little hard to explain what this actually does, so let's try it:
+
+
+```r
+gap_2xsorted = gap %>% 
+  arrange(year, continent)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap' not found
+```
+
+```r
+head(gap_2xsorted)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap_2xsorted' not found
+```
+
+What did the command above do? Why? What would change if you reversed the order of `continent` and `year` in the call?
+
+::: solution
+This command *first* sorted the data set by the unique values in the `year` column. It then "broke ties," where two rows have the **same** value for `year`, by *then* sorting by unique values in the `continent` column. So, we get records for `Africa` sooner than we get records for `Asia` for the same year.
+
+If we reversed the order of our two inputs, we'd instead get **all** records for `Africa` before getting **any** records for `Asia`. Within a `continent`, though, we'd get back earlier records before getting back more recent ones.
+
+This mirrors the behavior of "multi-column sorting" functionality as it exists in programs like Microsoft Excel.
+:::
+:::
+
+What if we wanted to make a new column using an old column's values as inputs? This is the kind of thing many of us would think to do in Microsoft Excel, where it isn't always easy or reproducible. Thankfully, we have the `dplyr` verb `mutate()` for this.
+
+Every input to `mutate()` past the first is an "instructions list" of how to make a new column using one or more old columns, and these "instructions lists" also follow *"new = old" format*.
+
+For example, here's how we would create a new column called `pop1K` that is made by dividing the `pop` column's values by 1000:
+
+
+```r
+gap_newcol = gap %>% 
+  mutate(pop1K = round(pop / 1000)) #New = old format
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap' not found
+```
+
+```r
+head(gap_newcol)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap_newcol' not found
+```
+
+You'll note that the old `pop` column is still around after this. If you want to get rid of it, you can provide `.keep = "unused"` as another input to `mutate()` and it will eliminate any old columns that were used to create new ones. Try it!
+
+To keep things simple here, we won't show you this, but `mutate()`'s "instructions lists" can get *very* complicated if you need them to! So, stop here to briefly imagine how you could perform a more complicated `mutate()` call here than the one we showed you.
+
+## GROUP_BY and SUMMARIZE
+
+Perhaps the most common (and powerful) action we might want to take on a data set is generating summaries from it. "What's the mean of *this* column?" or "What's the median value for all the different groups in *that* column?", for example.
+
+What if we wanted to calculate the mean life expectancy across all years by country for the gapminder data set?
+
+We *could* use `filter()` to go country by country (one at a time), save the resulting data sets as *intermediate objects*, and then take a mean manually of the `lifeExp` column for each *intermediate object*...but what a **pain** that would be!
+
+Thankfully, we don't have to; instead, we can just use `group_by()` and `summarize()`! Unlike other `dplyr` verbs we've met, these are a duo--they are **almost always** used together and, importantly, we *always* have to use `group_by()` first.
+
+So, let's start by understanding what `group_by()` does. Each input given to `group_by()` past the first creates groupings in the data. Specifically, you provide one (or more) names of columns and R will find all the different values in that column (such as all the different unique country names) and subtly "bundle up" all the rows that belong to each group.
+
+This is easier to show you than to explain, so let's try it:
+
+
+```r
+gap_grouped = gap %>% 
+  group_by(country) #Bundle up all the rows that belong to each different value in this country column.
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap' not found
+```
+
+```r
+head(gap_grouped)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap_grouped' not found
+```
+
+When we actually look at the new data set we've created, it will *look* as though nothing has changed. And, in a lot of ways, nothing has! However, if you examine `gap_grouped` in your R Studio's 'Environment' Pane, you'll notice that `gap_grouped` is considered a "grouped data frame" now instead of a plain-old one.
+
+We can see what that means by using the `str()` ("structure") function to peek "under the hood" at `gap_grouped`:
+
+
+```r
+str(gap_grouped)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap_grouped' not found
+```
+
+If we look towards the bottom of the output above, we'll see that, for every unique value in the `country` column, there is now a list of all the *row numbers* of rows sharing that same country value (i.e., all the rows for `"Afghanistan"`, all the rows for `"Albania"`, etc.). In other words, R now knows that each row belongs to one specific group within the larger data set. So, when we then ask it to calculate a summary of our data set, it can do so for each group separately.
+
+Let's see how that works by next examining `summarize()`. Each input past the first given to `summarize()` is an "instructions list" for how to generate a summary, with these "instructions lists" once again taking *new = old format* (see, I said these tools were designed to be consistent!).
+
+For example, let's tell `summarize()` to calculate a mean life expectancy for every country and to call the new column holding those means `mean_lifeExp`:
+
+
+```r
+gap_summarized = gap_grouped %>%  #Make sure you put our grouped data set here!
+  summarize(mean_lifeExp = mean(lifeExp)) #new = old format.
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap_grouped' not found
+```
+
+```r
+head(gap_summarized)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap_summarized' not found
+```
+
+::: challenge
+Consider: How many rows does `gap_summarized` now have? Why does it have so many fewer rows than `gap_grouped` did? And where did all the other columns go?
+
+::: solution
+`gap_summarized` only has 142 rows, whereas `gap_grouped` had 1704. The reason for this is that we summarized our data *by group*; we asked R to give us a __single value__ for each group in our data set. There are only 142 countries in the gapminder data set, so we end up with a single row for each country when we summarize.
+
+But where did all the other columns go? Well, we didn't ask for summaries of those other columns. So, if there used to be 12 values of `pop` for a given country before summarization, but there's going to be just a single row for a given country after summarization, and we don't tell R how exactly to "collapse" those 12 values down to just one, it's more "responsible" for R to just drop those columns entirely rather than to guess how it should do that collapsing, right? 
+
+:::
+:::
+
+If you want multiple summaries, you can simply provide multiple inputs to `summarize()`. For example, `n()` is a handy function for counting up the number of data points in each group prior to any summarizations occurring:
+
+
+```r
+gap_summarized = gap_grouped %>%  
+  summarize(mean_lifeExp = mean(lifeExp),
+            sample_sizes = n()) 
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap_grouped' not found
+```
+
+```r
+head(gap_summarized)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap_summarized' not found
+```
+
+Here, all the values in our new column are `12` because we have exactly 12 records per country to start with, but if the number of records differed between countries, the above operation would have shown us that.
+
+::: challenge
+One more concept: I said earlier that you can provide multiple inputs to `group_by()`. What happens when we do that? Let's try it:
+
+
+```r
+gap_2xgrouped = gap %>% 
+  group_by(continent, year)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap' not found
+```
+
+```r
+str(gap_2xgrouped)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap_2xgrouped' not found
+```
+
+How did R group together rows in this case?
+
+Next, try generating mean life expectancies and sample sizes using `gap_2xgrouped` as an input. You'll get different values than we did before when using `gap_grouped`, and we'll also get a different number of rows in the resulting output. Why?
+
+::: solution
+Here's how we'd generate those summaries:
+
+
+```r
+gap_2xsummarized = gap_2xgrouped %>%  
+  summarize(mean_lifeExp = mean(lifeExp),
+            sample_sizes = n()) 
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap_2xgrouped' not found
+```
+
+```r
+head(gap_2xsummarized)
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'gap_2xsummarized' not found
+```
+
+By specifying multiple columns to group by, what R did is find the rows belonging to each unique *combo* of the unique values in each column. That is, here, it found the rows that belong to each unique `continent` x `year` combo.
+
+So, when we summarize, we're calculating summaries *across* different countries that belong to each unique `continent` for each unique `year`. Because there are differing numbers of countries in each `continent`, our sample sizes now differ between the continents--examine the final data frame and confirm that!
+:::
+:::
+
+::: keypoints
+-   Use the `dplyr` package to manipulate data frames in efficient, clear, and intuitive ways.
+-   Use `select()` to retain specific variables when creating a new, smaller data frame.
+-   Use `filter()` to subset data based on values in one or more columns.
+-   Use `group_by()` and `summarize()` to generate summaries of data by groups.
+-   Use `mutate()` to create new variables using old ones.
+-   Use `rename()` to rename columns and `arrange()` to sort your data set by one or more columns.
+-   Use pipes (`%>%`) to string `dplyr` verbs together into "sentences."
+-   Remember that order matters when stringing together `dplyr` verbs!
+:::

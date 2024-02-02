@@ -40,6 +40,9 @@
     <loc>https://swcarpentry.github.io/r-novice-gapminder/13-dplyr.html</loc>
   </url>
   <url>
+    <loc>https://swcarpentry.github.io/r-novice-gapminder/13b-dplyr.html</loc>
+  </url>
+  <url>
     <loc>https://swcarpentry.github.io/r-novice-gapminder/14-tidyr.html</loc>
   </url>
   <url>
@@ -107,6 +110,9 @@
   </url>
   <url>
     <loc>https://swcarpentry.github.io/r-novice-gapminder/instructor/13-dplyr.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/r-novice-gapminder/instructor/13b-dplyr.html</loc>
   </url>
   <url>
     <loc>https://swcarpentry.github.io/r-novice-gapminder/instructor/14-tidyr.html</loc>

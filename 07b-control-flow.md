@@ -135,7 +135,7 @@ The good news is that you have probably experienced an "if statement" in your re
 life! For example:
 
 ![If you've been to an amusement park, you've probably seen a sign like
-this one before. It may not seem like it at first, but this sign is an "if statement!"](thistalltoride.jpg)
+this one before. It may not seem like it at first, but this sign is an "if statement!"](fig/thistalltoride.jpg)
 
 
 In life, we often encounter "rules." If we pass or satisfy the rule, we get
@@ -354,7 +354,7 @@ that you have probably experienced a "real-life for loop" at least once!
 For example:
 
 ![If you've ever been to a deli counter or the DMV, you've probably
-seen a ticket system like this one. This is just a for loop!](ticketsystem.jpg)
+seen a ticket system like this one. This is just a for loop!](fig/ticketsystem.jpg)
 
 
 If you've been to a deli counter that uses a ticket system like the one

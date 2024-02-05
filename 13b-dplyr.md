@@ -24,12 +24,12 @@ Note: This lesson uses the **gapminder data set**. This data set can be download
 
 
 ```r
-gap = read.csv("gapminder.csv", header = TRUE)
+gap = read.csv("data/gapminder.csv", header = TRUE)
 ```
 
 ```{.warning}
-Warning in file(file, "rt"): cannot open file 'gapminder.csv': No such file or
-directory
+Warning in file(file, "rt"): cannot open file 'data/gapminder.csv': No such
+file or directory
 ```
 
 ```{.error}

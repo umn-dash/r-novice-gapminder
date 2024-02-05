@@ -45,23 +45,6 @@ Once a package is installed, it still isn't "turned on" by default. So, to turn 
 library(dplyr)
 ```
 
-```{.output}
-
-Attaching package: 'dplyr'
-```
-
-```{.output}
-The following objects are masked from 'package:stats':
-
-    filter, lag
-```
-
-```{.output}
-The following objects are masked from 'package:base':
-
-    intersect, setdiff, setequal, union
-```
-
 The above command must be run every time you start up a new session of R and want access to `dplyr`'s features!
 
 ## Introduction

@@ -146,16 +146,7 @@ continuing.
 
 
 ```r
-gap = read.csv("gapminder.csv", header = TRUE)
-```
-
-```{.warning}
-Warning in file(file, "rt"): cannot open file 'gapminder.csv': No such file or
-directory
-```
-
-```{.error}
-Error in file(file, "rt"): cannot open the connection
+gap = read.csv("data/gapminder_data.csv", header = TRUE)
 ```
 
 Also, this lesson will revolve around use of the optional "add-on"
@@ -206,8 +197,14 @@ its structure and contents:
 head(gap)
 ```
 
-```{.error}
-Error in eval(expr, envir, enclos): object 'gap' not found
+```{.output}
+      country year      pop continent lifeExp gdpPercap
+1 Afghanistan 1952  8425333      Asia  28.801  779.4453
+2 Afghanistan 1957  9240934      Asia  30.332  820.8530
+3 Afghanistan 1962 10267083      Asia  31.997  853.1007
+4 Afghanistan 1967 11537966      Asia  34.020  836.1971
+5 Afghanistan 1972 13079460      Asia  36.088  739.9811
+6 Afghanistan 1977 14880372      Asia  38.438  786.1134
 ```
 
 Consider: Is the gapminder data set in "long" format or "wide" format?
@@ -276,18 +273,19 @@ gap_longer = gap %>% #Review the dplyr lesson if you forget how to use pipes!
   pivot_longer(cols = c(pop, lifeExp, gdpPercap), #We have to use c() here to bundle the column names together because these three columns are not consecutive.
                values_to = "Value", #Notice the quotation marks--these are essential here!
                names_to = "Statistic")
-```
-
-```{.error}
-Error in eval(expr, envir, enclos): object 'gap' not found
-```
-
-```r
 head(gap_longer)
 ```
 
-```{.error}
-Error in eval(expr, envir, enclos): object 'gap_longer' not found
+```{.output}
+# A tibble: 6 × 5
+  country      year continent Statistic     Value
+  <chr>       <int> <chr>     <chr>         <dbl>
+1 Afghanistan  1952 Asia      pop       8425333  
+2 Afghanistan  1952 Asia      lifeExp        28.8
+3 Afghanistan  1952 Asia      gdpPercap     779. 
+4 Afghanistan  1957 Asia      pop       9240934  
+5 Afghanistan  1957 Asia      lifeExp        30.3
+6 Afghanistan  1957 Asia      gdpPercap     821. 
 ```
 
 The first thing I want you to notice (by looking over in the 'Environment Pane') is that our new data set, `gap_longer` is indeed much longer than before: it's now up to `5112` rows! It also has fewer columns: 5 instead of the 6 we started with. 
@@ -319,18 +317,26 @@ Let's see what this looks like!
 gap_wider = gap %>% 
   pivot_wider(values_from = c(pop, lifeExp, gdpPercap),
               names_from = year)
-```
-
-```{.error}
-Error in eval(expr, envir, enclos): object 'gap' not found
-```
-
-```r
 head(gap_wider)
 ```
 
-```{.error}
-Error in eval(expr, envir, enclos): object 'gap_wider' not found
+```{.output}
+# A tibble: 6 × 38
+  country     continent pop_1952 pop_1957 pop_1962 pop_1967 pop_1972 pop_1977
+  <chr>       <chr>        <dbl>    <dbl>    <dbl>    <dbl>    <dbl>    <dbl>
+1 Afghanistan Asia       8425333  9240934 10267083 11537966 13079460 14880372
+2 Albania     Europe     1282697  1476505  1728137  1984060  2263554  2509048
+3 Algeria     Africa     9279525 10270856 11000948 12760499 14760787 17152804
+4 Angola      Africa     4232095  4561361  4826015  5247469  5894858  6162675
+5 Argentina   Americas  17876956 19610538 21283783 22934225 24779799 26983828
+6 Australia   Oceania    8691212  9712569 10794968 11872264 13177000 14074100
+# ℹ 30 more variables: pop_1982 <dbl>, pop_1987 <dbl>, pop_1992 <dbl>,
+#   pop_1997 <dbl>, pop_2002 <dbl>, pop_2007 <dbl>, lifeExp_1952 <dbl>,
+#   lifeExp_1957 <dbl>, lifeExp_1962 <dbl>, lifeExp_1967 <dbl>,
+#   lifeExp_1972 <dbl>, lifeExp_1977 <dbl>, lifeExp_1982 <dbl>,
+#   lifeExp_1987 <dbl>, lifeExp_1992 <dbl>, lifeExp_1997 <dbl>,
+#   lifeExp_2002 <dbl>, lifeExp_2007 <dbl>, gdpPercap_1952 <dbl>,
+#   gdpPercap_1957 <dbl>, gdpPercap_1962 <dbl>, gdpPercap_1967 <dbl>, …
 ```
 
 As the name correctly suggests, `gap_wider` is indeed much wider than our original gapminder data set: It has 38 columns instead of the original 6. We also have fewer rows: Just 142 (1 per `country`) compared to the original 1704. 
@@ -352,18 +358,19 @@ This task is thankfully *relatively* easy. We tell R that it should pull the nam
 gap_returned1 = gap_longer %>% 
   pivot_wider(names_from = Statistic,
               values_from = Value)
-```
-
-```{.error}
-Error in eval(expr, envir, enclos): object 'gap_longer' not found
-```
-
-```r
 head(gap_returned1)
 ```
 
-```{.error}
-Error in eval(expr, envir, enclos): object 'gap_returned1' not found
+```{.output}
+# A tibble: 6 × 6
+  country      year continent      pop lifeExp gdpPercap
+  <chr>       <int> <chr>        <dbl>   <dbl>     <dbl>
+1 Afghanistan  1952 Asia       8425333    28.8      779.
+2 Afghanistan  1957 Asia       9240934    30.3      821.
+3 Afghanistan  1962 Asia      10267083    32.0      853.
+4 Afghanistan  1967 Asia      11537966    34.0      836.
+5 Afghanistan  1972 Asia      13079460    36.1      740.
+6 Afghanistan  1977 Asia      14880372    38.4      786.
 ```
 
 :::
@@ -387,18 +394,19 @@ gap_returned2 = gap_wider %>%
   pivot_longer(cols = pop_1952:gdpPercap_2007,
                names_to = c(".value", "year"),
                names_sep = "_")
-```
-
-```{.error}
-Error in eval(expr, envir, enclos): object 'gap_wider' not found
-```
-
-```r
 head(gap_returned2)
 ```
 
-```{.error}
-Error in eval(expr, envir, enclos): object 'gap_returned2' not found
+```{.output}
+# A tibble: 6 × 6
+  country     continent year       pop lifeExp gdpPercap
+  <chr>       <chr>     <chr>    <dbl>   <dbl>     <dbl>
+1 Afghanistan Asia      1952   8425333    28.8      779.
+2 Afghanistan Asia      1957   9240934    30.3      821.
+3 Afghanistan Asia      1962  10267083    32.0      853.
+4 Afghanistan Asia      1967  11537966    34.0      836.
+5 Afghanistan Asia      1972  13079460    36.1      740.
+6 Afghanistan Asia      1977  14880372    38.4      786.
 ```
 Our inputs for `names_to` were first telling R "the names of the new columns should come from the *first* parts of the names of the columns we're getting rid of." That was the `".values"` bit!
 

@@ -419,18 +419,17 @@ argument names and their default values.</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>coat,weight,likes_string</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>calico,<span class="fl">2.1</span>,<span class="dv">1</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>black,<span class="fl">5.0</span>,<span class="dv">0</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>tabby,<span class="fl">3.2</span>,<span class="dv">1</span></span></code></pre>
+<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>coat,weight,likes_string</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>calico,<span class="fl">2.1</span>,<span class="dv">1</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>black,<span class="fl">5.0</span>,<span class="dv">0</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>tabby,<span class="fl">3.2</span>,<span class="dv">1</span></span></code></pre>
 </div>
-<div id="tip-editing-text-files-in-r" class="callout callout">
+<div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="tip-editing-text-files-in-r" class="callout-inner">
-<h3 class="callout-title">Tip: Editing Text files in R<a class="anchor" aria-label="anchor" href="#tip-editing-text-files-in-r"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="tip-editing-text-files-in-r">Tip: Editing Text files in R<a class="anchor" aria-label="anchor" href="#tip-editing-text-files-in-r"></a></h3>
 <div class="callout-content">
 <p>Alternatively, you can create <code>data/feline-data.csv</code> using
 a text editor (Nano), or within RStudio with the <strong>File -&gt; New
@@ -466,13 +465,12 @@ tabs. Of these three functions <code>read.csv</code> is the most
 commonly used. If needed it is possible to override the default
 delimiting punctuation marks for both <code>read.csv</code> and
 <code>read.delim</code>.</p>
-<div id="check-your-data-for-factors" class="callout callout">
+<div id="callout2" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="check-your-data-for-factors" class="callout-inner">
-<h3 class="callout-title">Check your data for factors<a class="anchor" aria-label="anchor" href="#check-your-data-for-factors"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="check-your-data-for-factors">Check your data for factors<a class="anchor" aria-label="anchor" href="#check-your-data-for-factors"></a></h3>
 <div class="callout-content">
 <p>In recent times, the default way how R handles textual data has
 changed. Text data was interpreted by R automatically into a format
@@ -655,11 +653,11 @@ file <code>data/feline-data_v2.csv</code>.</p>
 <div class="codewrapper sourceCode" id="cb29">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>coat,weight,likes_string</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>calico,<span class="fl">2.1</span>,<span class="dv">1</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>black,<span class="fl">5.0</span>,<span class="dv">0</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>tabby,<span class="fl">3.2</span>,<span class="dv">1</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>tabby,<span class="fl">2.3</span> or <span class="fl">2.4</span>,<span class="dv">1</span></span></code></pre>
+<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a>coat,weight,likes_string</span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>calico,<span class="fl">2.1</span>,<span class="dv">1</span></span>
+<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a>black,<span class="fl">5.0</span>,<span class="dv">0</span></span>
+<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a>tabby,<span class="fl">3.2</span>,<span class="dv">1</span></span>
+<span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a>tabby,<span class="fl">2.3</span> or <span class="fl">2.4</span>,<span class="dv">1</span></span></code></pre>
 </div>
 <p>Load the new cats data like before, and check what type of data we
 find in the <code>weight</code> column:</p>
@@ -1952,13 +1950,12 @@ containing all the values in the first row.</p>
 </div>
 </div>
 </div>
-<div id="tip-renaming-data-frame-columns" class="callout callout">
+<div id="callout3" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="tip-renaming-data-frame-columns" class="callout-inner">
-<h3 class="callout-title">Tip: Renaming data frame columns<a class="anchor" aria-label="anchor" href="#tip-renaming-data-frame-columns"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="tip-renaming-data-frame-columns">Tip: Renaming data frame columns<a class="anchor" aria-label="anchor" href="#tip-renaming-data-frame-columns"></a></h3>
 <div class="callout-content">
 <p>Data frames have column names, which can be accessed with the
 <code>names()</code> function.</p>
@@ -2334,7 +2331,7 @@ lists and vectors, with some added attributes.</li>
   "identifier": "https://swcarpentry.github.io/r-novice-gapminder/04-data-structures-part1.html",
   "dateCreated": "2015-04-18",
   "dateModified": "2024-02-01",
-  "datePublished": "2024-02-27"
+  "datePublished": "2024-03-05"
 }
 
   </script><script>

@@ -513,9 +513,10 @@ programmer, <code>if()</code> will probably feel very “programming-y” to
 you at first.</p>
 <p>The good news is that you have probably experienced an “if statement”
 in your real life! For example:</p>
-<figure><img src="fig/thistalltoride.jpeg" alt="photo of amusement park barrier to entrance" class="figure mx-auto d-block"><figcaption>If you’ve been to an amusement park, you’ve probably
-seen a sign like this one before. It may not seem like it at first, but
-this sign is an “if statement!”</figcaption></figure><p>In life, we often encounter “rules.” If we pass or satisfy the rule,
+<figure><img src="fig/thistalltoride.jpeg" alt="photo of amusement park barrier to entrance" class="figure mx-auto d-block"><div class="figcaption">If you’ve been to an amusement park, you’ve
+probably seen a sign like this one before. It may not seem like it at
+first, but this sign is an “if statement!”</div>
+</figure><p>In life, we often encounter “rules.” If we pass or satisfy the rule,
 we get to do stuff (like ride a roller coaster) and, if we don’t pass or
 satisfy the rule, we have to do nothing.</p>
 <p><code>if()</code> works the exact same way! We provide it a “rule” as
@@ -584,7 +585,7 @@ fails)–what could you do in this situation?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Your first temptation might be to put multiple <code>if()</code>s in
 a row to catch all possible outcomes, such as by using the two
@@ -628,13 +629,12 @@ parentheses. Why? Remember that <em>logical tests</em> must be
 single <em>logical test</em> can yield either outcome, so the one
 <em>logical test</em> we give to <code>if()</code> can serve as the
 necessary input for both <code>if()</code> and <code>else</code>.</p>
-<div id="callout1" class="callout callout">
+<div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="callout-inner">
-<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout1"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title">Callout</h3>
 <div class="callout-content">
 <p><strong>Important</strong>: This means that an <code>else</code> is
 <em>fundamentally dependent</em> on the <code>if()</code> it goes with.
@@ -644,12 +644,12 @@ an error:</p>
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(x <span class="sc">&gt;</span> <span class="dv">20</span>) {</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Yes"</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>} </span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span> { </span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"No"</span>)</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre>
+<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="cf">if</span>(x <span class="sc">&gt;</span> <span class="dv">20</span>) {</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Yes"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>} </span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="cf">else</span> { </span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"No"</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>}</span></code></pre>
 </div>
 <p>This is an example of how line breaks do <em>occasionally</em> matter
 in R.</p>
@@ -680,7 +680,7 @@ set up earlier, do you think?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>Recall that we want the value in column <code>c</code> to be equal to
 <code>1</code> only <em>if</em> two specific conditions are met. So, we
@@ -724,7 +724,7 @@ against two rules instead of just one.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3">Show me the solution</h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Here’s what this could look like:</p>
 <div class="codewrapper sourceCode" id="cb15">
@@ -795,9 +795,10 @@ tasks is exactly what the <code>for()</code> function is for.</p>
 will probably look very “programming-y” to you. However, once again, the
 good news is that you have probably experienced a “real-life for loop”
 at least once! For example:</p>
-<figure><img src="fig/ticketsystem.jpeg" alt="photo of ticketing systems at delis and the DMV" class="figure mx-auto d-block"><figcaption>If you’ve ever been to a deli counter or the DMV,
-you’ve probably seen a ticket system like this one. This is just a for
-loop!</figcaption></figure><p>If you’ve been to a deli counter that uses a ticket system like the
+<figure><img src="fig/ticketsystem.jpeg" alt="photo of ticketing systems at delis and the DMV" class="figure mx-auto d-block"><div class="figcaption">If you’ve ever been to a deli counter or the
+DMV, you’ve probably seen a ticket system like this one. This is just a
+for loop!</div>
+</figure><p>If you’ve been to a deli counter that uses a ticket system like the
 one above, you probably already know how the system works:</p>
 <ol style="list-style-type: decimal"><li><p>Everyone who wants some meat or cheese takes a ticket with a
 unique number on it.</p></li>
@@ -905,7 +906,7 @@ challenge, do you think?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4">Show me the solution</h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>To fill out all 10,000 rows of our <code>c</code> column, we need to
 do the same check <em>for each row</em>. Again, we can’t even discuss
@@ -1003,13 +1004,12 @@ row accordingly.” As R works through the pool of values in
 one at a time, so it will start out being <code>2</code>, then
 <code>3</code>, and so on. So, we can use that to point R to a new row
 each time through the loop!</p>
-<div id="callout2" class="callout callout">
+<div id="callout2" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="callout-inner">
-<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout2"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title">Callout</h3>
 <div class="callout-content">
 <p>Notice we can also do math inside <em>square brackets</em> to access
 the <em>previous</em> value in column <code>b</code>–that’s a handy
@@ -1094,7 +1094,7 @@ the two tests.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5">Show me the solution</h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>Here’s one valid way to do this, though there are others! Don’t
 forget to preallocate column <code>d</code> first!</p>
@@ -1190,7 +1190,7 @@ the fly for you with respect to what operations it should do.</li>
   "identifier": "https://swcarpentry.github.io/r-novice-gapminder/07b-control-flow.html",
   "dateCreated": "2015-04-18",
   "dateModified": "2024-02-02",
-  "datePublished": "2024-02-27"
+  "datePublished": "2024-03-05"
 }
 
   </script><script>

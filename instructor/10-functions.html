@@ -402,12 +402,13 @@ again. We may also obtain similar data from a different source in the
 future.</p>
 <p>In this lesson, we’ll learn how to write a function so that we can
 repeat several operations with a single command.</p>
-<div id="callout1" class="callout">
+<div id="what-is-a-function" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="what-is-a-function">What is a function?<a class="anchor" aria-label="anchor" href="#what-is-a-function"></a></h3>
+<div id="what-is-a-function" class="callout-inner">
+<h3 class="callout-title">What is a function?<a class="anchor" aria-label="anchor" href="#what-is-a-function"></a>
+</h3>
 <div class="callout-content">
 <p>Functions gather a sequence of operations into a whole, preserving it
 for ongoing use. Functions provide:</p>
@@ -464,12 +465,13 @@ operators to it.</p>
 assigned to those variables so that we can use them inside the function.
 Inside the function, we use a <a href="reference.html#return-statement">return statement</a> to send a
 result back to whoever asked for it.</p>
-<div id="callout2" class="callout">
+<div id="tip" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="tip">Tip<a class="anchor" aria-label="anchor" href="#tip"></a></h3>
+<div id="tip" class="callout-inner">
+<h3 class="callout-title">Tip<a class="anchor" aria-label="anchor" href="#tip"></a>
+</h3>
 <div class="callout-content">
 <p>One feature unique to R is that the return statement is not required.
 R automatically returns whichever variable is on the last line of the
@@ -900,12 +902,13 @@ for later. Now, we can use it to calculate the GDP for:</p>
 <li>A single combination of year and country.</li>
 </ul><p>By using <code>%in%</code> instead, we can also give multiple years
 or countries to those arguments.</p>
-<div id="callout3" class="callout">
+<div id="tip-pass-by-value" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="tip-pass-by-value">Tip: Pass by value<a class="anchor" aria-label="anchor" href="#tip-pass-by-value"></a></h3>
+<div id="tip-pass-by-value" class="callout-inner">
+<h3 class="callout-title">Tip: Pass by value<a class="anchor" aria-label="anchor" href="#tip-pass-by-value"></a>
+</h3>
 <div class="callout-content">
 <p>Functions in R almost always make copies of the data to operate on
 inside of a function body. When we modify <code>dat</code> inside the
@@ -918,12 +921,13 @@ the function, stay inside the body of the function.</p>
 </div>
 </div>
 </div>
-<div id="callout4" class="callout">
+<div id="tip-function-scope" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="tip-function-scope">Tip: Function scope<a class="anchor" aria-label="anchor" href="#tip-function-scope"></a></h3>
+<div id="tip-function-scope" class="callout-inner">
+<h3 class="callout-title">Tip: Function scope<a class="anchor" aria-label="anchor" href="#tip-function-scope"></a>
+</h3>
 <div class="callout-content">
 <p>Another important concept is scoping: any variables (or functions!)
 you create or modify inside the body of a function only exist for the
@@ -1048,12 +1052,13 @@ prints out the text wrapped with the <code>wrapper</code>:</p>
 </div>
 </div>
 </div>
-<div id="callout5" class="callout">
+<div id="tip-1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="tip-1">Tip<a class="anchor" aria-label="anchor" href="#tip-1"></a></h3>
+<div id="tip-1" class="callout-inner">
+<h3 class="callout-title">Tip<a class="anchor" aria-label="anchor" href="#tip-1"></a>
+</h3>
 <div class="callout-content">
 <p>R has some unique aspects that can be exploited when performing more
 complicated operations. We will not be writing anything that requires
@@ -1064,12 +1069,13 @@ Wickham.</p>
 </div>
 </div>
 </div>
-<div id="callout6" class="callout">
+<div id="tip-testing-and-documenting" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="tip-testing-and-documenting">Tip: Testing and documenting<a class="anchor" aria-label="anchor" href="#tip-testing-and-documenting"></a></h3>
+<div id="tip-testing-and-documenting" class="callout-inner">
+<h3 class="callout-title">Tip: Testing and documenting<a class="anchor" aria-label="anchor" href="#tip-testing-and-documenting"></a>
+</h3>
 <div class="callout-content">
 <p>It’s important to both test functions and document them:
 Documentation helps you, and others, understand what the purpose of your
@@ -1152,7 +1158,7 @@ R.</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.2" class="external-link">sandpaper (0.16.2)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.4" class="external-link">pegboard (0.7.4)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.1" class="external-link">varnish (1.0.1)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.3" class="external-link">sandpaper (0.16.3)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.4" class="external-link">pegboard (0.7.4)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.1" class="external-link">varnish (1.0.1)</a></p>
 			</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -1175,7 +1181,7 @@ R.</li>
   "identifier": "https://swcarpentry.github.io/r-novice-gapminder/instructor/10-functions.html",
   "dateCreated": "2015-04-18",
   "dateModified": "2024-03-12",
-  "datePublished": "2024-03-12"
+  "datePublished": "2024-03-19"
 }
 
   </script><script>

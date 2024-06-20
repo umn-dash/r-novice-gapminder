@@ -64,17 +64,17 @@ episodes:
 - 03-seeking-help.Rmd
 - 04-data-structures-part1.Rmd
 - 05-data-structures-part2.Rmd
+#- welcome-to-r.Rmd
 - 06-data-subsetting.Rmd
 - 07b-control-flow.Rmd
 - 08-plot-ggplot2.Rmd
 - 09-vectorization.Rmd
 - 10-functions.Rmd
 - 11-writing-data.Rmd
-- 12-plyr.Rmd
 - 13b-dplyr.Rmd
 - 14b-tidyr.Rmd
-- 15-knitr-markdown.Rmd
-- 16-wrap-up.Rmd
+- 14-knitr-markdown.Rmd
+- 15-wrap-up.Rmd
 
 # Information for Learners
 learners: 

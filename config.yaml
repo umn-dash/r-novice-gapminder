@@ -59,12 +59,12 @@ contact: 'team@carpentries.org'
 
 # Order of episodes in your lesson
 episodes: 
-- 01-rstudio-intro.Rmd
-- 02-project-intro.Rmd
-- 03-seeking-help.Rmd
-- 04-data-structures-part1.Rmd
-- 05-data-structures-part2.Rmd
-#- welcome-to-r.Rmd
+#- 01-rstudio-intro.Rmd
+#- 02-project-intro.Rmd
+#- 03-seeking-help.Rmd
+#- 04-data-structures-part1.Rmd
+#- 05-data-structures-part2.Rmd
+- welcome-to-r.Rmd
 - 06-data-subsetting.Rmd
 - 07b-control-flow.Rmd
 - 08-plot-ggplot2.Rmd

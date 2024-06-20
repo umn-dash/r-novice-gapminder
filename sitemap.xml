@@ -193,6 +193,9 @@
     <loc>https://swcarpentry.github.io/r-novice-gapminder/instructor/reference.html</loc>
   </url>
   <url>
+    <loc>https://swcarpentry.github.io/r-novice-gapminder/instructor/welcome-to-r.html</loc>
+  </url>
+  <url>
     <loc>https://swcarpentry.github.io/r-novice-gapminder/instructor-notes.html</loc>
   </url>
   <url>
@@ -203,5 +206,8 @@
   </url>
   <url>
     <loc>https://swcarpentry.github.io/r-novice-gapminder/reference.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/r-novice-gapminder/welcome-to-r.html</loc>
   </url>
 </urlset>

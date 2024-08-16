@@ -105,29 +105,31 @@ more. But in case you do, here are a few:
 Those are the more "boilerplate" reasons to learn R you'll hear most
 places. Here are two additional ones, from UM R instructor Alex Bajcz:
 
--   <div>
+```         
+<div>
 
-    > R *changed my life*, literally! Until I got exposure to R as a
-    > Ph.D. student, I'd ***never*** have said I had ***any*** interest
-    > in programming or data science, let alone an interest in them as a
-    > ***career***. Be on the computer all day? *Never*! I'm an
-    > *ecologist*! I study *plants*–I'm meant to be *outside*! But, fast
-    > forward ten years, and here I am—I'm a quantitative ecologist who
-    > uses R *every day* who doesn't *want* to imagine things being any
-    > other way! Thanks to R, I discovered a passion I never would've
-    > known I had, and I'd have missed out on the best job I could
-    > imagine having (even better, it turns out, than the job I'd
-    > trained for!).
-    >
-    > R also makes me feel *powerful*. This isn't a macho or petty
-    > thing; it's earnest. I *still* remember the first time I had R do
-    > something for me that I didn't want to do myself (because it'd
-    > have taken me hours to do in Microsoft Excel). Putting a computer
-    > to work for you, and having it achieve something awesome for you,
-    > perfectly, in a fraction of the time, is an *incredible* feeling.
-    > Try it—you just might like it as much as I do!
+> R *changed my life*, literally! Until I got exposure to R as a
+> Ph.D. student, I'd ***never*** have said I had ***any*** interest
+> in programming or data science, let alone an interest in them as a
+> ***career***. Be on the computer all day? *Never*! I'm an
+> *ecologist*! I study *plants*–I'm meant to be *outside*! But, fast
+> forward ten years, and here I am—I'm a quantitative ecologist who
+> uses R *every day* who doesn't *want* to imagine things being any
+> other way! Thanks to R, I discovered a passion I never would've
+> known I had, and I'd have missed out on the best job I could
+> imagine having (even better, it turns out, than the job I'd
+> trained for!).
+>
+> R also makes me feel *powerful*. This isn't a macho or petty
+> thing; it's earnest. I *still* remember the first time I had R do
+> something for me that I didn't want to do myself (because it'd
+> have taken me hours to do in Microsoft Excel). Putting a computer
+> to work for you, and having it achieve something awesome for you,
+> perfectly, in a fraction of the time, is an *incredible* feeling.
+> Try it—you just might like it as much as I do!
 
-    </div>
+</div>
+```
 
 Hopefully, you'll leave these lessons with some new reasons to be
 excited about R and, who knows, maybe learning R will change your life
@@ -153,163 +155,13 @@ So, in these lessons, we'll *only* teach you R; we won't cover
 statistics, graphic design principles, or data science best practices.
 You can pick those skills up *after* you feel confident with R!
 
-::: objectives
--   Recognize the several important panes found in RStudio and be able
-    to explain what each does.
-
--   Write complete, grammatical R commands (sentences).
-
--   List R's most common operators (punctuation marks).
-
--   Transition from communicating with R at the Console to communicating
-    with R via script files.
-
--   Define what an R object is and explain how to assign one a name (and
-    why you'd want to).
-
--   List several common R object and data types.
-
--   Use indices to look at (or change) specific values inside objects.
-
--   Define what an R function is and explain how to use (call) one to
-    accomplish a specific task.
-
--   Install and turn on new R packages.
-
--   Define a working directory and explain how to choose one.
-
--   Save and load files.
-
--   Create an R Project folder and articulate the value of doing so.
-:::
-
-::: questions
--   Why bother learning R?
--   What is RStudio? Why use it instead of "base R?"
--   What am I looking at when I open RStudio?
--   How do I "talk to" R and ask it to do things?
--   What things can I make R *build*? What things can I make R *do*?
--   How do I speak "grammatically correct" R? What are its rules and
-    punctuation marks?
--   How do I perform typical "project management" tasks in R, such as
-    creating a project folder, saving and loading files, and managing
-    packages?
-:::
-
-## Preface
-
-**Important**: This course assumes you have **downloaded** *and*
-**installed** the latest version of R ([go to this page and select the
-link near the top-center of the page matching your operating
-system](https://cran.rstudio.com/ "The CRAN website has download links for the latest version of R by operating system")).
-You also need to have **downloaded** *and* **installed** the latest
-version of RStudio ([go to this page and scroll down until you see a
-table of links. Select the one matching your operating
-system](https://posit.co/download/rstudio-desktop/ "Posit's website contains a set of links to download the latest version of RStudio according to your operating system")).
-I[f you've not completed these tasks, stop and do so now]{.underline}.
-
-RStudio is not strictly required for these lessons, but, while you *can*
-use R without RStudio, it's a lot like writing a novel with quill and
-ink. You *can* do it, but it's **definitely** not easier, so why would
-you?As such, these lessons assume you're using RStudio. If you choose
-not to use RStudio, you do so at your own risk!
-
-By contrast, this course does **not** assume you have *any* experience
-with coding in *any* programming language, including R. While prior
-exposure to R or another programming language would give you a head
-start, it's not expected. Our goal is to take you from "R Zero" to "R
-Hero" as quickly but carefully as possible!
-
-## Why R?
-
-Every R instructor gives a different answer to this question.
-Presumably, you're here because you *already* have reasons to learn R
-(hopefully someone isn't forcing you to do it!), and you don't need
-more. But in case you do, here are a few:
-
--   R is one of the most powerful statistics and data science platforms.
-    Unlike many others, it's free and open-source; anyone can add more
-    cool stuff to it at any time, and you'll never encounter a paywall.
-
--   R is HUGE. There are more than 10,000 add-on packages (think
-    "expansions," "sequels," or "fan-fiction") for R that add an
-    unbelievable volume of extra features and content, with more coming
-    out every week.
-
--   R has a massive, global community of hundreds of millions of active
-    users. There are forums, guides, user groups, and more you can tap
-    into to level up your R skills and make connections.
-
--   R experience is in demand. Knowing R isn't just cool; it's
-    lucrative!
-
--   If you need to make publication-quality graphs, or do research
-    collaboratively with others, or talk with other programming
-    languages, R has got you covered in all these respects and more.
-
-Those are the more "boilerplate" reasons to learn R you'll hear most
-places. Here are two additional ones, from UM R instructor Alex Bajcz:
-
--   <div>
-
-    > R *changed my life*, literally! Until I got exposure to R as a
-    > Ph.D. student, I'd ***never*** have said I had ***any*** interest
-    > in programming or data science, let alone an interest in them as a
-    > ***career***. Be on the computer all day? *Never*! I'm an
-    > *ecologist*! I study *plants*–I'm meant to be *outside*! But, fast
-    > forward ten years, and here I am—I'm a quantitative ecologist who
-    > uses R *every day* who doesn't *want* to imagine things being any
-    > other way! Thanks to R, I discovered a passion I never would've
-    > known I had, and I'd have missed out on the best job I could
-    > imagine having (even better, it turns out, than the job I'd
-    > trained for!).
-    >
-    > R also makes me feel *powerful*. This isn't a macho or petty
-    > thing; it's earnest. I *still* remember the first time I had R do
-    > something for me that I didn't want to do myself (because it'd
-    > have taken me hours to do by hand in Microsoft Excel). Putting a
-    > computer to work for you and having it achieve something awesome
-    > for you, perfectly, in a fraction of the time is an *incredible*
-    > feeling. Try it—you just might like it as much as I do!
-
-    </div>
-
-I really do owe a great deal to R. More than I feel I can easily repay.
-But these lessons are my way of trying! Hopefully, you'll leave with
-some new reasons to be excited about R and, who knows, maybe learning R
-will change your life too!
-
-## How we'll roll
-
-I *firmly* believe that learning a programming language (especially if
-you're not a programmer by training and have no interest in becoming
-one) needs to be treated the same way as learning a *human* language.
-Learning human languages is *hard*! It took you many **years** to learn
-your first one, and I bet you still sometimes make mistakes!
-
-Granted, most programming languages (R included) are actually simpler
-than most human languages, but not by a huge amount. It's this steep
-learning curve that scares off so many from learning R. It's also why,
-in my opinion, courses that teach R *plus* something else (such as
-statistics) generally fail to establish most students as R
-users—learning R *by itself* is already hard *enough*! Pair that with
-learning something else too and you have a recipe for disaster.
-
-So, in this set of lessons, I'm *only* going to teach you R. I'm not
-going to cover any statistics, or graphic design principles, or data
-science best practices. You can pick those skills up *after* you feel
-confident with speaking R fluently!
-
-We're also not going to focus much on general programming skills or best
-practices. These are meant to be introductory lessons; you can learn
-more advanced R programming skills in your *next* R class!
-
-So, our entire focus here will be getting you comfortable and confident
+Instead, our entire focus will be getting you comfortable and confident
 with R. This means, among other things, helping you to:
 
 -   Navigate RStudio.
 
--   Understand R's *vocabulary* (its nouns and verbs).
+-   Understand R's *vocabulary* (its nouns and verbs, plus its
+    adjectives and adverbs).
 
 -   Understand R's *grammar* and *syntax* (what symbols to use and when,
     what is and isn't allowed, and what a correct "sentence" in R looks

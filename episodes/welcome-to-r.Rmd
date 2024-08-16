@@ -502,7 +502,7 @@ sometimes. Not good!
 work!]{.underline} The Console just isn't designed to prevent work loss.
 Thankfully, we have a better option...
 
-## Staying on-script
+### Staying on-script
 
 Let's open something called a **script file** (or "script" for short).
 Go to "File" at the top of your RStudio window, select "New File," then

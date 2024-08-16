@@ -2,36 +2,34 @@
 site: sandpaper::sandpaper_site
 ---
 
-*an introduction to R for non-programmers using gapminder data*
+*An introduction to the R programming language for non-programmers using the gapminder data set*
 
-The goal of this lesson is to teach novice programmers to write modular code
-and best practices for using R for data analysis. R is commonly used in many
-scientific disciplines for statistical analysis and its array of third-party
-packages. We find that many scientists who come to Software Carpentry workshops
-use R and want to learn more. The emphasis of these materials is to give
-attendees a strong foundation in the fundamentals of R, and to teach best
-practices for scientific computing: breaking down analyses into modular units,
-task automation, and encapsulation.
+The goal of this series of lessons is to teach novice programmers to write functional, useful code in the R programming language. R is commonly used in many disciplines for statistical analysis, and its huge volume of third-party packages make it highly versatile.
 
-Note that this workshop will focus on teaching the fundamentals of the
-programming language R, and will not teach statistical analysis.
+Many scientists who attend Software Carpentry workshops *use* R, but they don't all necessarily feel they *understand* it. Here, we attempt to give attendees a strong foundation in the fundamentals of R by thinking of it like a human language, one with its own grammar, punctuation, nouns, verbs, questions, adverbs, adjectives, and so on. We cover all those things step by step, concept by concept, in the most logical order we can manage.
 
-The lesson contains more material than can be taught in a day.  The [instructor notes page](instructors/instructor-notes.md) has some suggested lesson plans suitable for a one or half day workshop.
+Note that this workshop focuses *only* on teaching the fundamentals of R and RStudio; it does *not* cover statistical analysis, graphic design, or programming or data science best practices. Those topics are best explored after you feel comfortable using the language!
 
-A variety of third party packages are used throughout this workshop. These
-are not necessarily the best, nor are they comprehensive, but they are
-packages we find useful, and have been chosen primarily for their
-usability.
+The written lessons contain *far* more material than can be taught in a day (or even three). However, the material can be readily broken into several day-long or half-day chunks. Alternatively, separate workshops can be used to cover the "Welcome to R" and "tidyverse" content.
 
-::::::::::::::::::::::::::::::::::::::::::  prereq
-
+::: prereq
 ## Prerequisites
 
-Understand that computers store data and instructions (programs, scripts etc.) in files.
-Files are organised in directories (folders).
-Know how to access files not in the working directory by specifying the path.
+These lessons assume you have R and RStudio installed on your computer.
 
+-   [Download and install the latest version of R](https://www.r-project.org/) for your operating system.
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
+-   [Download and install RStudio](https://www.rstudio.com/products/rstudio/download/#download).
 
+RStudio is an application (an integrated development environment, or IDE) that facilitates the use of R and offers a number of nice features. You will need the free Desktop version for your computer for these lessons.
 
+This lesson also assumes you understand that computers store data and information inside of files and that files are organized into folders (directories). Specific files and folders can be referenced by programs like R using their names or with file paths. No other general computing or programming knowledge is assumed.
+:::
+
+A variety of third-party packages are used throughout this workshop. These are not necessarily the best such packages, but they are ones many researchers use and find useful.
+
+Interested users can download and install these packages by running the following command inside of R, if they choose, but this needn't be done prior to attendance:
+
+```{r installpack}
+install.packages("dpyr", "ggplot2", "gapminder", "tidyr")
+```

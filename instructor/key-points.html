@@ -248,7 +248,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="06-data-subsetting.html">2. Subsetting Data</a>
+        <a href="07b-control-flow.html">2. Control Flow--if() and for()</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -260,7 +260,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="07b-control-flow.html">3. Control Flow--if() and for()</a>
+        <a href="09-vectorization.html">3. Vectorization</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -272,7 +272,7 @@
 <div class="accordion accordion-flush" id="accordionFlush5">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading5">
-        <a href="08-plot-ggplot2.html">4. Creating Publication-Quality Graphics with ggplot2</a>
+        <a href="10-functions.html">4. Functions Explained</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -284,7 +284,7 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="09-vectorization.html">5. Vectorization</a>
+        <a href="13b-dplyr.html">5. Data Frame Manipulation with dplyr</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -296,7 +296,7 @@
 <div class="accordion accordion-flush" id="accordionFlush7">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading7">
-        <a href="10-functions.html">6. Functions Explained</a>
+        <a href="08-plot-ggplot2.html">6. Creating Publication-Quality Graphics with ggplot2</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -308,7 +308,7 @@
 <div class="accordion accordion-flush" id="accordionFlush8">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading8">
-        <a href="11-writing-data.html">7. Writing Data</a>
+        <a href="14b-tidyr.html">7. Pivoting using tidyr</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -320,7 +320,7 @@
 <div class="accordion accordion-flush" id="accordionFlush9">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading9">
-        <a href="13b-dplyr.html">8. Data Frame Manipulation with dplyr</a>
+        <a href="14-knitr-markdown.html">8. Producing Reports With knitr</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -332,31 +332,7 @@
 <div class="accordion accordion-flush" id="accordionFlush10">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading10">
-        <a href="14b-tidyr.html">9. Pivoting using tidyr</a>
-    </div>
-<!--/div.accordion-header-->
-
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush11">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading11">
-        <a href="14-knitr-markdown.html">10. Producing Reports With knitr</a>
-    </div>
-<!--/div.accordion-header-->
-
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush12">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading12">
-        <a href="15-wrap-up.html">11. Writing Good Software</a>
+        <a href="15-wrap-up.html">9. Writing Good Software</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -424,74 +400,70 @@
 <section id="welcome-to-r"><h2 class="section-heading"><a href="welcome-to-r.html">Welcome to R!</a></h2>
 <hr class="half-width">
 <ul>
-<li>R is an incredibly powerful tool and knowing how to use it is an
-incredibly valuable skill to have.</li>
-<li>R is a very capable calculator, so we can use it to do math.</li>
-<li>R, like human languages, has punctuation marks (operators) that have
-specific meanings and usage rules.</li>
-<li>R “sentences” are called commands. They include inputs as well as
-instructions for operations we hope R will carry out for us.</li>
+<li>R is an incredibly powerful tool; knowing how to use it is an
+<em>incredibly</em> valuable skill. However, to learn it takes the same
+diligence as learning a human language does.</li>
+<li>R is a very capable calculator; you can use it to do math.</li>
+<li>R, like human languages, has punctuation marks
+(<strong>operators</strong>) that have specific meanings and usage
+rules.</li>
+<li>R “sentences” are called <strong>commands</strong>. They include
+inputs as well as instructions for operations we want R to perform for
+us.</li>
 <li>Script files are text files that allow us to write and store code
-and annotations and then “move” this code over to the Console when we
-are ready.</li>
-<li>“Nouns” in R are called objects. These are impermanent until we use
-assignment commands to name them, in which case they will persist until
-we overwrite them or close R.</li>
-<li>Our environment is everything we have named since starting the
-current session of R (except for anything we’ve deleted).</li>
+and annotations and then “teleport” this code to the Console when we’re
+ready.</li>
+<li>“Nouns” in R are called <strong>objects</strong>. These are
+impermanent until we use <strong>assignment commands</strong> to name
+them, in which case they persist until we overwrite them or close
+R.</li>
+<li>Our <strong>environment</strong> is everything we have named since
+starting our R session.</li>
 <li>There are rules about what we can and can’t (and should and
 shouldn’t) name objects in R.</li>
-<li>R is a case-sensitive language, meaning capital and lowercase
-letters are viewed as distinct.</li>
-<li>It’s good practice to have a naming convention you use to name
-objects.</li>
+<li>R is case-sensitive, so capital and lowercase letters are
+distinct.</li>
+<li>It’s good to have a naming convention to name objects.</li>
 <li>Objects in R take many different shapes, and the values they store
-can be of many different types.</li>
-<li>In R, “verbs” are called functions. Functions take inputs, perform
-operations, and produce outputs. Some functions are used to do math,
-while others can be used to create new objects.</li>
+can be of many different types (the “adjectives” of the R
+language).</li>
+<li>In R, “verbs” are called <strong>functions</strong>. Functions take
+inputs, perform operations, and produce outputs. Some functions do math;
+others might create new objects.</li>
 <li>Functions have slots for specific inputs. These slots are called
-parameters, and they have names. The inputs we provide to these slots
-are called arguments. Arguments should be given in a specific order, and
-they should be of specific types.</li>
+<strong>parameters</strong>, and they have names. The inputs we provide
+to these slots are called <strong>arguments</strong>. Arguments should
+be given in a specific order, and they should be of specific types.</li>
+<li>Some function inputs are optional; others are required. Optional
+inputs are like R’s “adverbs” in that they often control <em>how</em> R
+performs a specific operation.</li>
 <li>If we want help with a function, we can use the <code>?</code>
-operator.</li>
-<li>The <code>=</code> symbol actually has many different uses in R,
-which can be confusing for R learners. As such, consider using
-<code>&lt;-</code> for assignment instead.</li>
-<li>Logical tests are like “questions” in the R language. There are many
-different logical operators we can use to ask a variety of
+operator to open its help page.</li>
+<li>The <code>=</code> symbol has many different uses in R, which can be
+confusing. As such, consider using <code>&lt;-</code> for
+assignment.</li>
+<li>
+<strong>Logical tests</strong> are like “questions” in R. There are
+many different <strong>logical operators</strong> to ask a variety of
 questions.</li>
+<li>Use the square bracket operators <code>[ ]</code>to peek inside
+objects in <strong>indexing</strong> commands. Indexing commands can
+also be used to update or subset objects, and their format differs for
+1D vs. 2D object types.</li>
 <li>Installing packages is necessary to have access to them, but even
-then, packages must be turned on to be able to use their features.</li>
-<li>Your working directory is the folder that R assumes it should be
-interacting with when loading or saving files.</li>
-<li>R Project folders are a handy way to keep yourself organized when
-conducting a real-life analysis.</li>
-<li>Loading files in R typically requires using a <code>read</code>
-function, and saving files typically requires using a <code>write</code>
-function.</li>
-</ul></section><section id="06-data-subsetting"><h2 class="section-heading"><a href="06-data-subsetting.html">Subsetting Data</a></h2>
-<hr class="half-width">
-<ul>
-<li>Indexing in R starts at 1, not 0.</li>
-<li>Access individual values by location using <code>[]</code>.</li>
-<li>Access slices of data using <code>[low:high]</code>.</li>
-<li>Access arbitrary sets of data using <code>[c(...)]</code>.</li>
-<li>Use logical operations and logical vectors to access subsets of
-data.</li>
+then, packages must be turned on to use their features.</li>
+<li>Your <strong>working directory</strong> is the folder R assumes it
+should interact with on your computer when loading/saving files.</li>
+<li>R Project folders are handy for keeping organized when working on a
+large, important, or complex project.</li>
+<li>Loading files in R typically requires a <code>read</code> function;
+saving files typically requires a <code>write</code> function.</li>
 </ul></section><section id="07b-control-flow"><h2 class="section-heading"><a href="07b-control-flow.html">Control Flow--if() and for()</a></h2>
 <hr class="half-width">
 <ul>
 <li>Use <code>if</code> and <code>else</code> to have R make choices on
 the fly for you with respect to what operations it should do.</li>
 <li>Use <code>for</code> to repeat operations many times.</li>
-</ul></section><section id="08-plot-ggplot2"><h2 class="section-heading"><a href="08-plot-ggplot2.html">Creating Publication-Quality Graphics with ggplot2</a></h2>
-<hr class="half-width">
-<ul>
-<li>Use <code>ggplot2</code> to create plots.</li>
-<li>Think about graphics in layers: aesthetics, geometry, statistics,
-scale transformation, and grouping.</li>
 </ul></section><section id="09-vectorization"><h2 class="section-heading"><a href="09-vectorization.html">Vectorization</a></h2>
 <hr class="half-width">
 <ul>
@@ -504,11 +476,6 @@ scale transformation, and grouping.</li>
 <li>Use <code>stopifnot()</code> to flexibly check function arguments in
 R.</li>
 <li>Load functions into programs using <code>source()</code>.</li>
-</ul></section><section id="11-writing-data"><h2 class="section-heading"><a href="11-writing-data.html">Writing Data</a></h2>
-<hr class="half-width">
-<ul>
-<li>Save plots from RStudio using the ‘Export’ button.</li>
-<li>Use <code>write.table</code> to save tabular data.</li>
 </ul></section><section id="13b-dplyr"><h2 class="section-heading"><a href="13b-dplyr.html">Data Frame Manipulation with dplyr</a></h2>
 <hr class="half-width">
 <ul>
@@ -529,6 +496,12 @@ columns.</li>
 together into “sentences.”</li>
 <li>Remember that order matters when stringing together
 <code>dplyr</code> verbs!</li>
+</ul></section><section id="08-plot-ggplot2"><h2 class="section-heading"><a href="08-plot-ggplot2.html">Creating Publication-Quality Graphics with ggplot2</a></h2>
+<hr class="half-width">
+<ul>
+<li>Use <code>ggplot2</code> to create plots.</li>
+<li>Think about graphics in layers: aesthetics, geometry, statistics,
+scale transformation, and grouping.</li>
 </ul></section><section id="14b-tidyr"><h2 class="section-heading"><a href="14b-tidyr.html">Pivoting using tidyr</a></h2>
 <hr class="half-width">
 <ul>
@@ -602,8 +575,8 @@ style.</li>
   "url": "https://swcarpentry.github.io/r-novice-gapminder/instructor/key-points.html",
   "identifier": "https://swcarpentry.github.io/r-novice-gapminder/instructor/key-points.html",
   "dateCreated": "2015-04-18",
-  "dateModified": "2024-08-13",
-  "datePublished": "2024-08-13"
+  "dateModified": "2024-08-16",
+  "datePublished": "2024-08-16"
 }
 
   </script><script>

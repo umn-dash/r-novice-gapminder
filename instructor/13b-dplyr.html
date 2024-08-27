@@ -294,10 +294,10 @@
               </div>
             </div>
 
-            <hr class="half-width"><div class="accordion accordion-flush resources" id="accordionFlush12">
+            <hr class="half-width"><div class="accordion accordion-flush lesson-resources" id="accordionFlush12">
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingTwelve">
-                  <button class="accordion-button collapsed" id="resources" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">
+                  <button class="accordion-button collapsed" id="lesson-resources" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">
                     RESOURCES
                   </button>
                 </h2>
@@ -317,7 +317,7 @@
                 </div>
               </div>
             </div>
-            <hr class="half-width resources"><a href="../instructor/aio.html">See all in one page</a>
+            <hr class="half-width lesson-resources"><a href="../instructor/aio.html">See all in one page</a>
 
 
             <hr class="d-none d-sm-block d-md-none"><div class="d-grid gap-1">
@@ -390,8 +390,7 @@ together.</li>
 </div>
 </div>
 </div>
-<section><h2 class="section-heading" id="preparation-and-setup">Preparation and setup<a class="anchor" aria-label="anchor" href="#preparation-and-setup"></a>
-<a class="anchor" aria-label="anchor" href="#preparation-and-setup"></a></h2>
+<section><h2 class="section-heading" id="preparation-and-setup">Preparation and setup<a class="anchor" aria-label="anchor" href="#preparation-and-setup"></a></h2>
 <hr class="half-width"><p>Note: This lesson uses the <strong>gapminder data set</strong>. This
 data set can be downloaded <a href="https://drive.google.com/file/d/1sBkIJlC_6fImNZhyV0XfsllyUD-hSmoS/view?usp=sharing" class="external-link">here</a>.
 Make sure to load the data set into your global environment before
@@ -433,8 +432,7 @@ features, we use the <code>library()</code> function:</p>
 </div>
 <p>The above command must be run every time you start up a new session
 of R and want access to <code>dplyr</code>’s features!</p>
-</section><section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
-<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
+</section><section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
 <hr class="half-width"><p>R users work with data frames A LOT…like, <em>a lot</em>. When
 working with data frames, we very often find ourselves wanting to
 perform a few specific actions, such as cutting certain rows or columns,
@@ -467,8 +465,7 @@ set:</p>
 5 Afghanistan 1972 13079460      Asia  36.088  739.9811
 6 Afghanistan 1977 14880372      Asia  38.438  786.1134</code></pre>
 </div>
-</section><section><h2 class="section-heading" id="select-and-rename">SELECT and RENAME<a class="anchor" aria-label="anchor" href="#select-and-rename"></a>
-<a class="anchor" aria-label="anchor" href="#select-and-rename"></a></h2>
+</section><section><h2 class="section-heading" id="select-and-rename">SELECT and RENAME<a class="anchor" aria-label="anchor" href="#select-and-rename"></a></h2>
 <hr class="half-width"><p>What if we only wanted a subset of the columns in a data set? The
 <code>dplyr</code> verb corresponding to this desire is
 <code>select()</code>.</p>
@@ -605,15 +602,13 @@ following:</p>
 <p>It’s as simple as that! If we wanted to rename multiple columns, we
 could just add more subsequent inputs to the same <code>rename()</code>
 call.</p>
-</section><section><h2 class="section-heading" id="the-magic-of-pipes">The magic of pipes<a class="anchor" aria-label="anchor" href="#the-magic-of-pipes"></a>
-<a class="anchor" aria-label="anchor" href="#the-magic-of-pipes"></a></h2>
+</section><section><h2 class="section-heading" id="the-magic-of-pipes">The magic of pipes<a class="anchor" aria-label="anchor" href="#the-magic-of-pipes"></a></h2>
 <hr class="half-width"><div id="challenge1" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge1"></a>
-</h3>
+<h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
 <p>What if I wanted to <em>first</em> eliminate some columns and
 <em>then</em> rename some of the remaining columns? How would you go
@@ -707,8 +702,7 @@ along with and also be more efficient! It also explains why every
 <code>dplyr</code> verb’s first input slot is the data frame to be
 manipulated–it makes every verb ready to receive inputs from “upstream”
 via a pipe!</p>
-</section><section><h2 class="section-heading" id="filter-arrange-and-mutate">FILTER, ARRANGE, and MUTATE<a class="anchor" aria-label="anchor" href="#filter-arrange-and-mutate"></a>
-<a class="anchor" aria-label="anchor" href="#filter-arrange-and-mutate"></a></h2>
+</section><section><h2 class="section-heading" id="filter-arrange-and-mutate">FILTER, ARRANGE, and MUTATE<a class="anchor" aria-label="anchor" href="#filter-arrange-and-mutate"></a></h2>
 <hr class="half-width"><p>What if we only wanted to look at the data from a specific continent
 or a specific time span (i.e., we want just specific rows)? The
 <code>dplyr</code> verb corresponding to this action is
@@ -770,8 +764,7 @@ with data from before the year <code>1975</code>:</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge2"></a>
-</h3>
+<h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
 <p>What if we wanted data only from <em>between</em> the years 1970 and
 1979? How would you achieve this goal using <code>filter()</code>? Hint:
@@ -829,8 +822,7 @@ you prefer? Why?</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge3"></a>
-</h3>
+<h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
 <p><strong>Important</strong>: When chaining dplyr verbs together, order
 matters! Why does the following code fail when we try to run it?</p>
@@ -918,8 +910,7 @@ reverse the sorting, we can use the <code>desc()</code> function:</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge4"></a>
-</h3>
+<h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
 <p>I mentioned above that you can provide multiple inputs to
 <code>arrange()</code>, but it’s a little hard to explain what this
@@ -1013,8 +1004,7 @@ Try it!</p>
 complicated if you need them to! So, stop here to briefly imagine how
 you could perform a more complicated <code>mutate()</code> call here
 than the one we showed you.</p>
-</section><section><h2 class="section-heading" id="group_by-and-summarize">GROUP_BY and SUMMARIZE<a class="anchor" aria-label="anchor" href="#group_by-and-summarize"></a>
-<a class="anchor" aria-label="anchor" href="#group_by-and-summarize"></a></h2>
+</section><section><h2 class="section-heading" id="group_by-and-summarize">GROUP_BY and SUMMARIZE<a class="anchor" aria-label="anchor" href="#group_by-and-summarize"></a></h2>
 <hr class="half-width"><p>Perhaps the most common (and powerful) action we might want to take
 on a data set is generating summaries from it. “What’s the mean of
 <em>this</em> column?” or “What’s the median value for all the different
@@ -1232,8 +1222,7 @@ those means <code>mean_lifeExp</code>:</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge5"></a>
-</h3>
+<h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
 <p>Consider: How many rows does <code>gap_summarized</code> now have?
 Why does it have so many fewer rows than <code>gap_grouped</code> did?
@@ -1301,8 +1290,7 @@ us that.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge6"></a>
-</h3>
+<h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
 <p>One more concept: I said earlier that you can provide multiple inputs
 to <code>group_by()</code>. What happens when we do that? Let’s try
@@ -1450,8 +1438,7 @@ that!</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul><li>Use the <code>dplyr</code> package to manipulate data frames in
 efficient, clear, and intuitive ways.</li>
@@ -1509,7 +1496,7 @@ together into “sentences.”</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.5" class="external-link">sandpaper (0.16.5)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.3" class="external-link">varnish (1.0.3)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.6" class="external-link">sandpaper (0.16.6)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.4" class="external-link">varnish (1.0.4)</a></p>
 			</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -1532,7 +1519,7 @@ together into “sentences.”</li>
   "identifier": "https://swcarpentry.github.io/r-novice-gapminder/instructor/13b-dplyr.html",
   "dateCreated": "2015-04-18",
   "dateModified": "2024-07-02",
-  "datePublished": "2024-08-20"
+  "datePublished": "2024-08-27"
 }
 
   </script><script>

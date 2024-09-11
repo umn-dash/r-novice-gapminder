@@ -222,7 +222,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="07b-control-flow.html">2. Control Flow--if() and for()</a>
+        <a href="exploring-the-tidyverse.html">2. Exploring the Tidyverse, a modern R "dialect"</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -231,7 +231,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="09-vectorization.html">3. Vectorization</a>
+        <a href="07b-control-flow.html">3. Control Flow--if() and for()</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -240,7 +240,7 @@
 <div class="accordion accordion-flush" id="accordionFlush5">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading5">
-        <a href="10-functions.html">4. Functions Explained</a>
+        <a href="09-vectorization.html">4. Vectorization</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -249,43 +249,7 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="13b-dplyr.html">5. Data Frame Manipulation with dplyr</a>
-    </div><!--/div.accordion-header-->
-
-  </div><!--/div.accordion-item-->
-</div><!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush7">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading7">
-        <a href="08-plot-ggplot2.html">6. Creating Publication-Quality Graphics with ggplot2</a>
-    </div><!--/div.accordion-header-->
-
-  </div><!--/div.accordion-item-->
-</div><!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush8">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading8">
-        <a href="14b-tidyr.html">7. Pivoting using tidyr</a>
-    </div><!--/div.accordion-header-->
-
-  </div><!--/div.accordion-item-->
-</div><!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush9">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading9">
-        <a href="14-knitr-markdown.html">8. Producing Reports With knitr</a>
-    </div><!--/div.accordion-header-->
-
-  </div><!--/div.accordion-item-->
-</div><!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush10">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading10">
-        <a href="15-wrap-up.html">9. Writing Good Software</a>
+        <a href="10-functions.html">5. Functions Explained</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -334,7 +298,7 @@
   <div class="col-xl-8 col-lg-12 primary-content">
     <nav class="lesson-content mx-md-4" aria-label="Previous and Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="index.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
-        <a class="chapter-link float-end" href="07b-control-flow.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="exploring-the-tidyverse.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
@@ -342,14 +306,14 @@
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
           Home
         </a>
-        <a class="chapter-link float-end" href="07b-control-flow.html" rel="next">
-          Next: Control Flow--if()...
+        <a class="chapter-link float-end" href="exploring-the-tidyverse.html" rel="next">
+          Next: Exploring the...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Welcome to R!</h1>
-        <p>Last updated on 2024-08-16 |
+        <p>Last updated on 2024-09-11 |
 
         <a href="https://github.com/swcarpentry/r-novice-gapminder/edit/main/episodes/welcome-to-r.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -457,9 +421,7 @@ has got you covered in all these respects and more.</p></li>
 </ul><p>Those are the more “boilerplate” reasons to learn R you’ll hear most
 places. Here are two additional ones, from UM R instructor Alex
 Bajcz:</p>
-<pre><code>&lt;div&gt;
-
-&gt; R *changed my life*, literally! Until I got exposure to R as a
+<pre><code>&gt; R *changed my life*, literally! Until I got exposure to R as a
 &gt; Ph.D. student, I'd ***never*** have said I had ***any*** interest
 &gt; in programming or data science, let alone an interest in them as a
 &gt; ***career***. Be on the computer all day? *Never*! I'm an
@@ -477,9 +439,7 @@ Bajcz:</p>
 &gt; have taken me hours to do in Microsoft Excel). Putting a computer
 &gt; to work for you, and having it achieve something awesome for you,
 &gt; perfectly, in a fraction of the time, is an *incredible* feeling.
-&gt; Try it—you just might like it as much as I do!
-
-&lt;/div&gt;</code></pre>
+&gt; Try it—you just might like it as much as I do!</code></pre>
 <p>Hopefully, you’ll leave these lessons with some new reasons to be
 excited about R and, who knows, maybe learning R will change your life
 too!</p>
@@ -574,7 +534,7 @@ What does R produce for us in each case? What does this tell us?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>R doesn’t produce anything new, hopefully! We should get
 <code>5</code> back both times:</p>
@@ -667,7 +627,7 @@ why?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>In the first case, you’ll get <code>25</code> (and not 17, as you
 might have expected). That’s because parentheses are R’s
@@ -858,7 +818,7 @@ script needs to be code!</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>In this case, R will print your command in the Console, but it won’t
 produce any <strong>output</strong>. That is because <code>#</code> is
@@ -1369,7 +1329,7 @@ convention</strong>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>There are no “right answers” here. Instead, I’ll give you a couple of
 rules from my own personal naming convention.</p>
@@ -1448,7 +1408,7 @@ happen if we tried to run <code>x = data</code> instead of
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>As we have seen, <u>R thinks unquoted text represents a potential
 object name</u>. So, to make it clear that we are writing textual data
@@ -1551,7 +1511,7 @@ each and see what they do!</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
   <h4 class="accordion-header" id="headingSolution6"> Show me the solution </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
 <div class="accordion-body">
 <p><code>exp()</code> raises the constant <code>e</code> to the power of
 the provided number:</p>
@@ -1861,7 +1821,7 @@ happens?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution7" aria-expanded="false" aria-controls="collapseSolution7">
   <h4 class="accordion-header" id="headingSolution7"> Show me the solution </h4>
 </button>
-<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
+<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
 <div class="accordion-body">
 <p><u>Vectors and matrices (most objects, really!) in R can only hold
 values of a single Type</u>. If we try to put multiple value types into
@@ -2052,7 +2012,7 @@ not? Try it and observe what you get.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution8" aria-expanded="false" aria-controls="collapseSolution8">
   <h4 class="accordion-header" id="headingSolution8"> Show me the solution </h4>
 </button>
-<div id="collapseSolution8" class="accordion-collapse collapse" aria-labelledby="headingSolution8" data-bs-parent="#accordionSolution8">
+<div id="collapseSolution8" class="accordion-collapse collapse" data-bs-parent="#accordionSolution8" aria-labelledby="headingSolution8">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb76">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2136,7 +2096,7 @@ Consider the following command:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution9" aria-expanded="false" aria-controls="collapseSolution9">
   <h4 class="accordion-header" id="headingSolution9"> Show me the solution </h4>
 </button>
-<div id="collapseSolution9" class="accordion-collapse collapse" aria-labelledby="headingSolution9" data-bs-parent="#accordionSolution9">
+<div id="collapseSolution9" class="accordion-collapse collapse" data-bs-parent="#accordionSolution9" aria-labelledby="headingSolution9">
 <div class="accordion-body">
 <p>First off, we could have written this same command this way
 instead:</p>
@@ -2382,7 +2342,7 @@ trying calculating the average.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution10" aria-expanded="false" aria-controls="collapseSolution10">
   <h4 class="accordion-header" id="headingSolution10"> Show me the solution </h4>
 </button>
-<div id="collapseSolution10" class="accordion-collapse collapse" aria-labelledby="headingSolution10" data-bs-parent="#accordionSolution10">
+<div id="collapseSolution10" class="accordion-collapse collapse" data-bs-parent="#accordionSolution10" aria-labelledby="headingSolution10">
 <div class="accordion-body">
 <p>We get an error that discusses <code>trim</code>. What even is
 that?!</p>
@@ -2505,7 +2465,7 @@ command <code>rep(x = -3:7, times = 5)</code>? What happens if you swap
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution11" aria-expanded="false" aria-controls="collapseSolution11">
   <h4 class="accordion-header" id="headingSolution11"> Show me the solution </h4>
 </button>
-<div id="collapseSolution11" class="accordion-collapse collapse" aria-labelledby="headingSolution11" data-bs-parent="#accordionSolution11">
+<div id="collapseSolution11" class="accordion-collapse collapse" data-bs-parent="#accordionSolution11" aria-labelledby="headingSolution11">
 <div class="accordion-body">
 <p>If we switch to <code>each</code> instead of <code>times</code>, we
 instead repeat each value inside our vector that many times
@@ -2610,7 +2570,7 @@ answers you receive, what questions do you think we’ve asked?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution12" aria-expanded="false" aria-controls="collapseSolution12">
   <h4 class="accordion-header" id="headingSolution12"> Show me the solution </h4>
 </button>
-<div id="collapseSolution12" class="accordion-collapse collapse" aria-labelledby="headingSolution12" data-bs-parent="#accordionSolution12">
+<div id="collapseSolution12" class="accordion-collapse collapse" data-bs-parent="#accordionSolution12" aria-labelledby="headingSolution12">
 <div class="accordion-body">
 <p>First, let’s see the answers we receive:</p>
 <div class="codewrapper sourceCode" id="cb106">
@@ -2816,7 +2776,7 @@ following commands to find out:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution13" aria-expanded="false" aria-controls="collapseSolution13">
   <h4 class="accordion-header" id="headingSolution13"> Show me the solution </h4>
 </button>
-<div id="collapseSolution13" class="accordion-collapse collapse" aria-labelledby="headingSolution13" data-bs-parent="#accordionSolution13">
+<div id="collapseSolution13" class="accordion-collapse collapse" data-bs-parent="#accordionSolution13" aria-labelledby="headingSolution13">
 <div class="accordion-body">
 <p>Each of these commands teaches us something different about how
 indexing works in R.</p>
@@ -3229,7 +3189,7 @@ packages we’ll need for these lessons: <code>gapminder</code>,
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution14" aria-expanded="false" aria-controls="collapseSolution14">
   <h4 class="accordion-header" id="headingSolution14"> Show me the solution </h4>
 </button>
-<div id="collapseSolution14" class="accordion-collapse collapse" aria-labelledby="headingSolution14" data-bs-parent="#accordionSolution14">
+<div id="collapseSolution14" class="accordion-collapse collapse" data-bs-parent="#accordionSolution14" aria-labelledby="headingSolution14">
 <div class="accordion-body">
 <p>First, you’d use <code>install.packages()</code> to download and
 install each package. We can actually put all the packages into a single
@@ -3475,7 +3435,7 @@ saving files typically requires a <code>write</code> function.</li>
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="index.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
-        <a class="chapter-link float-end" href="07b-control-flow.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="exploring-the-tidyverse.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
@@ -3483,8 +3443,8 @@ saving files typically requires a <code>write</code> function.</li>
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
           Home
         </a>
-        <a class="chapter-link float-end" href="07b-control-flow.html" rel="next">
-          Next: Control Flow--if()...
+        <a class="chapter-link float-end" href="exploring-the-tidyverse.html" rel="next">
+          Next: Exploring the...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -3530,8 +3490,8 @@ saving files typically requires a <code>write</code> function.</li>
   "url": "https://swcarpentry.github.io/r-novice-gapminder/welcome-to-r.html",
   "identifier": "https://swcarpentry.github.io/r-novice-gapminder/welcome-to-r.html",
   "dateCreated": "2015-04-18",
-  "dateModified": "2024-08-16",
-  "datePublished": "2024-09-10"
+  "dateModified": "2024-09-11",
+  "datePublished": "2024-09-11"
 }
 
   </script><script>

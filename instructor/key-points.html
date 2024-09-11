@@ -248,7 +248,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="07b-control-flow.html">2. Control Flow--if() and for()</a>
+        <a href="exploring-the-tidyverse.html">2. Exploring the Tidyverse, a modern R "dialect"</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -260,7 +260,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="09-vectorization.html">3. Vectorization</a>
+        <a href="07b-control-flow.html">3. Control Flow--if() and for()</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -272,7 +272,7 @@
 <div class="accordion accordion-flush" id="accordionFlush5">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading5">
-        <a href="10-functions.html">4. Functions Explained</a>
+        <a href="09-vectorization.html">4. Vectorization</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -284,55 +284,7 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="13b-dplyr.html">5. Data Frame Manipulation with dplyr</a>
-    </div>
-<!--/div.accordion-header-->
-
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush7">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading7">
-        <a href="08-plot-ggplot2.html">6. Creating Publication-Quality Graphics with ggplot2</a>
-    </div>
-<!--/div.accordion-header-->
-
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush8">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading8">
-        <a href="14b-tidyr.html">7. Pivoting using tidyr</a>
-    </div>
-<!--/div.accordion-header-->
-
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush9">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading9">
-        <a href="14-knitr-markdown.html">8. Producing Reports With knitr</a>
-    </div>
-<!--/div.accordion-header-->
-
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush10">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading10">
-        <a href="15-wrap-up.html">9. Writing Good Software</a>
+        <a href="10-functions.html">5. Functions Explained</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -458,6 +410,74 @@ should interact with on your computer when loading/saving files.</li>
 large, important, or complex project.</li>
 <li>Loading files in R typically requires a <code>read</code> function;
 saving files typically requires a <code>write</code> function.</li>
+</ul></section><section id="exploring-the-tidyverse"><h2 class="section-heading"><a href="exploring-the-tidyverse.html">Exploring the Tidyverse, a modern R "dialect"</a></h2>
+<hr class="half-width">
+<ul>
+<li>Use the <code>dplyr</code> package to manipulate data frames in
+efficient, clear, and intuitive ways.</li>
+<li>Use <code>select()</code> to retain specific columns when creating
+subsetted data frames.</li>
+<li>Use <code>filter()</code> to create a subset by rows using logical
+tests to determine whether a row should be kept or gotten rid of.</li>
+<li>Use <code>group_by()</code> and <code>summarize()</code> to generate
+summaries of categorical groups within a data set.</li>
+<li>Use <code>mutate()</code> to create new variables using old ones as
+inputs.</li>
+<li>Use <code>rename()</code> to rename columns.</li>
+<li>Use <code>arrange()</code> to sort your data set by one or more
+columns.</li>
+<li>Use pipes (<code>%&gt;%</code>) to string <code>dplyr</code> verbs
+together into “paragraphs.”</li>
+<li>Remember that order matters when stringing together
+<code>dplyr</code> verbs!</li>
+</ul>
+<ul>
+<li><p>Every ggplot graph requires a <code>ggplot()</code> call, a data
+set, some <strong>mapped aesthetics</strong>, and one or more
+<strong>geometries</strong>. Mixing and matching data and their types,
+aesthetics, and geometries can result in a near-infinite number of
+different base graphs.</p></li>
+<li><p>Mapping an aesthetic means linking a visual component of your
+graph, such as colors or a specific axis, to either a column of data in
+your data set or to a constant value. To do the former, you must use the
+<code>aes()</code> function. To do the latter, you can use
+<code>aes()</code>, but you don’t need to.</p></li>
+<li><p>Aesthetics can be mapped (and data sets provided)
+<strong>globally</strong> within the <code>ggplot()</code> call, in
+which case they will apply to all map components, or
+<strong>locally</strong> within individual <code>geom_*()</code> calls,
+in which case they will apply only to that element.</p></li>
+<li><p>If you want to adjust the appearance of any aesthetic, use the
+appropriate <code>scale_*()</code> family function.</p></li>
+<li><p>If you want to adjust the appearance of any text box, line, or
+rectangle, use the <code>theme()</code> function, the proper parameter,
+and the appropriate <code>element_*()</code> function.</p></li>
+<li><p>In ggplot commands, the <code>+</code> operator is used to
+(literally) add additional components or layers to a graph. If multiple
+layers are added, the layers added later in the command will appear on
+top of layers specified earlier in the command and may cover them up. If
+multiple, conflicting specifications are given for a property in the
+same ggplot command, whichever specification is given later will “win
+out.”</p></li>
+<li><p>Craft a single <code>theme()</code> command you can use to
+provide consistent base styling for every one of your graphs!</p></li>
+<li><p>Use faceting to automatically create a series of sub-panels, one
+for each member of a grouping variable, that will share the same
+aesthetics and design properties.</p></li>
+<li><p>Use the <code>ggsave()</code> function to programmatically save
+ggplots as image files with the desired resolution, size, and file
+type.</p></li>
+</ul>
+<ul>
+<li>Use the <code>tidyr</code> package to reshape the organization of
+your data.</li>
+<li>Use <code>pivot_longer()</code> to go towards a “longer”
+layout.</li>
+<li>Use <code>pivot_wider()</code> to go towards a “wider” layout.</li>
+<li>Recognize that “longness” and “wideness” is a continuum and that
+your data may not be as “long” or as “wide” as they could be.</li>
+<li>Recognize that there are advantages and disadvantages to every data
+layout.</li>
 </ul></section><section id="07b-control-flow"><h2 class="section-heading"><a href="07b-control-flow.html">Control Flow--if() and for()</a></h2>
 <hr class="half-width">
 <ul>
@@ -476,57 +496,6 @@ the fly for you with respect to what operations it should do.</li>
 <li>Use <code>stopifnot()</code> to flexibly check function arguments in
 R.</li>
 <li>Load functions into programs using <code>source()</code>.</li>
-</ul></section><section id="13b-dplyr"><h2 class="section-heading"><a href="13b-dplyr.html">Data Frame Manipulation with dplyr</a></h2>
-<hr class="half-width">
-<ul>
-<li>Use the <code>dplyr</code> package to manipulate data frames in
-efficient, clear, and intuitive ways.</li>
-<li>Use <code>select()</code> to retain specific variables when creating
-a new, smaller data frame.</li>
-<li>Use <code>filter()</code> to subset data based on values in one or
-more columns.</li>
-<li>Use <code>group_by()</code> and <code>summarize()</code> to generate
-summaries of data by groups.</li>
-<li>Use <code>mutate()</code> to create new variables using old
-ones.</li>
-<li>Use <code>rename()</code> to rename columns and
-<code>arrange()</code> to sort your data set by one or more
-columns.</li>
-<li>Use pipes (<code>%&gt;%</code>) to string <code>dplyr</code> verbs
-together into “sentences.”</li>
-<li>Remember that order matters when stringing together
-<code>dplyr</code> verbs!</li>
-</ul></section><section id="08-plot-ggplot2"><h2 class="section-heading"><a href="08-plot-ggplot2.html">Creating Publication-Quality Graphics with ggplot2</a></h2>
-<hr class="half-width">
-<ul>
-<li>Use <code>ggplot2</code> to create plots.</li>
-<li>Think about graphics in layers: aesthetics, geometry, statistics,
-scale transformation, and grouping.</li>
-</ul></section><section id="14b-tidyr"><h2 class="section-heading"><a href="14b-tidyr.html">Pivoting using tidyr</a></h2>
-<hr class="half-width">
-<ul>
-<li>Use the <code>tidyr</code> package to reshape the organization of
-your data.</li>
-<li>Use <code>pivot_longer()</code> to go towards a “longer”
-layout.</li>
-<li>Use <code>pivot_wider()</code> to go towards a “wider” layout.</li>
-</ul></section><section id="14-knitr-markdown"><h2 class="section-heading"><a href="14-knitr-markdown.html">Producing Reports With knitr</a></h2>
-<hr class="half-width">
-<ul>
-<li>Mix reporting written in R Markdown with software written in R.</li>
-<li>Specify chunk options to control formatting.</li>
-<li>Use <code>knitr</code> to convert these documents into PDF and other
-formats.</li>
-</ul></section><section id="15-wrap-up"><h2 class="section-heading"><a href="15-wrap-up.html">Writing Good Software</a></h2>
-<hr class="half-width">
-<ul>
-<li>Keep your project folder structured, organized and tidy.</li>
-<li>Document what and why, not how.</li>
-<li>Break programs into short single-purpose functions.</li>
-<li>Write re-runnable tests.</li>
-<li>Don’t repeat yourself.</li>
-<li>Be consistent in naming, indentation, and other aspects of
-style.</li>
 </ul></section>
 </div>
     </main>
@@ -575,8 +544,8 @@ style.</li>
   "url": "https://swcarpentry.github.io/r-novice-gapminder/instructor/key-points.html",
   "identifier": "https://swcarpentry.github.io/r-novice-gapminder/instructor/key-points.html",
   "dateCreated": "2015-04-18",
-  "dateModified": "2024-09-10",
-  "datePublished": "2024-09-10"
+  "dateModified": "2024-09-11",
+  "datePublished": "2024-09-11"
 }
 
   </script><script>

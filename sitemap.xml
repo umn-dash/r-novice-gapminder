@@ -85,6 +85,9 @@
     <loc>https://swcarpentry.github.io/r-novice-gapminder/discuss.html</loc>
   </url>
   <url>
+    <loc>https://swcarpentry.github.io/r-novice-gapminder/exploring-the-tidyverse.html</loc>
+  </url>
+  <url>
     <loc>https://swcarpentry.github.io/r-novice-gapminder/images.html</loc>
   </url>
   <url>
@@ -173,6 +176,9 @@
   </url>
   <url>
     <loc>https://swcarpentry.github.io/r-novice-gapminder/instructor/discuss.html</loc>
+  </url>
+  <url>
+    <loc>https://swcarpentry.github.io/r-novice-gapminder/instructor/exploring-the-tidyverse.html</loc>
   </url>
   <url>
     <loc>https://swcarpentry.github.io/r-novice-gapminder/instructor/images.html</loc>

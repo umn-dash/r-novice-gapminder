@@ -106,8 +106,6 @@ Those are the more "boilerplate" reasons to learn R you'll hear most
 places. Here are two additional ones, from UM R instructor Alex Bajcz:
 
 ```         
-<div>
-
 > R *changed my life*, literally! Until I got exposure to R as a
 > Ph.D. student, I'd ***never*** have said I had ***any*** interest
 > in programming or data science, let alone an interest in them as a
@@ -127,8 +125,6 @@ places. Here are two additional ones, from UM R instructor Alex Bajcz:
 > to work for you, and having it achieve something awesome for you,
 > perfectly, in a fraction of the time, is an *incredible* feeling.
 > Try it—you just might like it as much as I do!
-
-</div>
 ```
 
 Hopefully, you'll leave these lessons with some new reasons to be

@@ -349,7 +349,7 @@
         
 <section id="aio-welcome-to-r"><p>Content from <a href="welcome-to-r.html">Welcome to R!</a></p>
 <hr>
-<p>Last updated on 2024-09-11 |
+<p>Last updated on 2024-09-12 |
 
         <a href="https://github.com/swcarpentry/r-novice-gapminder/edit/main/episodes/welcome-to-r.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -3539,7 +3539,7 @@ saving files typically requires a <code>write</code> function.</li>
 </div>
 </section></section><section id="aio-exploring-the-tidyverse"><p>Content from <a href="exploring-the-tidyverse.html">Exploring the Tidyverse, a modern R "dialect"</a></p>
 <hr>
-<p>Last updated on 2024-09-11 |
+<p>Last updated on 2024-09-12 |
 
         <a href="https://github.com/swcarpentry/r-novice-gapminder/edit/main/episodes/exploring-the-tidyverse.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -4721,6 +4721,212 @@ combo. Because there are differing numbers of countries in each
 </div>
 </div>
 </div>
+</div>
+</section><section><h2 class="section-heading" id="bonus-joins">Bonus: Joins<a class="anchor" aria-label="anchor" href="#bonus-joins"></a>
+</h2>
+<hr class="half-width">
+<p>It’s common to store related data in several, smaller tables rather
+than together in one large table, especially if the data are of
+different lengths or come from different sources.</p>
+<p>However, it may sometimes be convenient, or even necessary, to pull
+these related data together into one data set to analyze or graph
+them.</p>
+<p>When we combine together multiple, smaller tables of data into a
+single larger table, that’s called a <strong>join</strong>. Joins are a
+straightforward operation for computers to perform, but they can be
+tricky for humans to conceptualize, in part because they can take so
+many forms:</p>
+<figure><img src="fig/sjo3s5mm.png" alt="A diagram showing the most common types of joins. On the top are two small data tables (a “left” table in blue and a “right” table in green). A left join keeps all the rows in the left-hand table and adds any matching data to those rows found in the right-hand table (any missing data implied by the join gets marked as NAs). A right join does the opposite, keeping only all the rows in the right-hand table. An inner join will only keep rows that have a match in both tables, and a full join will keep all rows from either table whether they had a match or not. A “match” is determined by whether or not the values in key columns (here, the two ID columns) match between the left-hand and right-hand tables. In this example, row 2 of the left table and row 1 of the right table match because they have the same ID value, so all joins will unite the data in these two rows in the product." class="figure mx-auto d-block"><div class="figcaption">A diagram showing the most common types of
+joins. On the top are two small data tables (a “left” table in blue and
+a “right” table in green). A left join keeps all the rows in the
+left-hand table and adds any matching data to those rows found in the
+right-hand table (any missing data implied by the join gets marked as
+NAs). A right join does the opposite, keeping only all the rows in the
+right-hand table. An inner join will only keep rows that have a match in
+both tables, and a full join will keep all rows from either table
+whether they had a match or not. A “match” is determined by whether or
+not the values in <strong>key columns</strong> (here, the two ID
+columns) match between the left-hand and right-hand tables. In this
+example, row 2 of the left table and row 1 of the right table match
+because they have the same ID value, so all joins will unite the data in
+these two rows in the product.</div>
+</figure><p>Here are the key ideas behind a join:</p>
+<ul>
+<li><p>A join occurs between two tables: a <strong>“left” table</strong>
+and a <strong>“right” table</strong>. They’re called this just because
+we <em>have</em> to specify them in <em>some</em> order in our join
+command, so one will, by necessity, be to the “left” of the
+other.</p></li>
+<li>
+<p>The goal of a join is (usually) to make a “bigger” table by
+uniting related data found across the two smaller tables in some way.
+We’ll do that by:</p>
+<ul>
+<li><p>Adding data from one table onto <em>existing</em> rows of the
+other table, making the receiving table wider (this is the idea behind
+<strong>left</strong> and <strong>right joins</strong>), or, in
+addition, by</p></li>
+<li><p>Adding <em>whole rows</em> from one table to the other table that
+were “new” to the receiving table (that’s the idea behind a <strong>full
+join</strong>).</p></li>
+</ul>
+</li>
+<li><p>The exception is an <strong>inner join</strong>. An inner join
+will <em>usually</em> result in a smaller final table because we only
+keep, in the end, rows that had matches in both tables. Records that
+fail to match are eliminated.</p></li>
+<li>
+<p>But, wait, how do we know if data in one table “matches” data in
+another table and thus should be joined?</p>
+<ul>
+<li><p>Well, because data found in the same row of a data set are
+usually related (they’re from the same country, person, group,
+<em>etc</em>.), relatedness is a “rowwise” question. We ask “which
+row(s) in <em>this</em> table are related to which row(s) in
+<em>that</em> table?”</p></li>
+<li><p>Because computers can’t “guess” about relatedness, relatedness
+has to be explicit for a join to work: for rows to be considered
+related, they have to have matching values for one or more sets of
+<strong>key columns</strong>.</p></li>
+<li>
+<p>For example, in the picture above, consider the <code>ID</code>
+column that exists in <em>both</em> tables. If the <code>ID</code>
+columns were our <strong>key columns</strong>, row 1 in the left table,
+with its <code>ID</code> value of <code>1</code>, would have no matching
+row in the right table (there is no row in that table with an
+<code>ID</code> value of <code>1</code> also). Thus, there is no new
+info in the right-hand table that could be added to the left-hand table
+for this row.</p>
+<ul>
+<li>By contrast, row 2 in the left table, with its <code>ID</code> value
+of <code>2</code>, <em>does</em> have a matching row in the right-hand
+table because its first row also has an <code>ID</code> value of
+<code>2</code>. Thus, we <em>could</em> combine these two rows in some
+way, either by adding new information from the right-hand table’s row to
+the left-hand table’s row or <em>vice versa</em>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>An analogy that might make this make relatable is to think of joins
+like combining jigsaw puzzle pieces. We can only connect together two
+puzzle pieces into something larger if they have corresponding
+“connectors;” matching key-column values are those connectors in a
+join.</p>
+<p>Joins are a <em>very</em> powerful data manipulation—one many users
+might otherwise have to perform in a language such as SQL. However,
+<code>dplyr</code> possesses a full suite of joining functions,
+including <code>left_join()</code> and <code>right_join()</code>,
+<code>full_join()</code>, and <code>inner_join()</code>, to allow R
+users to perform joins with ease.</p>
+<p>Because a left join is the easiest form to explain and is also the
+most commonly performed type of join, let’s use <code>dplyr</code>’s
+<code>left_join()</code> function to add new information to every row of
+the <code>gapminder</code> data set.</p>
+<p>We’ll do this by <em>first</em> retrieving a new data set that
+<em>also</em> possesses a column containing country names—this column
+and the <code>country</code> column in our <code>gapminder</code> data
+set will be our <strong>key columns</strong>; R will use them to figure
+out which rows across the two data sets are related (<em>i.e.</em>,
+they’ll share the same values in their <code>country</code>
+columns).</p>
+<p>We can make such a data set using the <code>countrycode</code>
+package, so let’s install that package (if you don’t already have it),
+turn it on, and check it out:</p>
+<div class="codewrapper sourceCode" id="cb48">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">install.packages</span><span class="op">(</span><span class="st">"countrycode"</span><span class="op">)</span> <span class="co">#ONLY RUN ONCE, ONLY IF YOU DON'T ALREADY HAVE THIS PACKAGE</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>The following package(s) will be installed:
+- countrycode [1.6.0]
+These packages will be installed into "~/work/r-novice-gapminder/r-novice-gapminder/renv/profiles/lesson-requirements/renv/library/linux-ubuntu-jammy/R-4.4/x86_64-pc-linux-gnu".
+
+# Installing packages --------------------------------------------------------
+- Installing countrycode ...                    OK [linked from cache]
+Successfully installed 1 package in 5.6 milliseconds.</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb50">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">countrycode</span><span class="op">)</span> <span class="co">#TURN ON THIS PACKAGE'S TOOLS</span></span>
+<span></span>
+<span><span class="va">country_abbrs</span> <span class="op">=</span> <span class="fu">countrycode</span><span class="op">(</span><span class="fu">unique</span><span class="op">(</span><span class="va">gap</span><span class="op">$</span><span class="va">country</span><span class="op">)</span>, <span class="co">#LOOK UP ALL THE DIFFERENT GAPMINDER COUNTRIES IN THE countrycode DATABASE</span></span>
+<span>            <span class="st">"country.name"</span>, <span class="co">#FIND EACH COUNTRY'S NAME IN THIS DATABASE'S country.name COLUMN</span></span>
+<span>            <span class="st">"iso3c"</span><span class="op">)</span> <span class="co">#RETRIEVE EACH COUNTRY'S 3-LETTER ABBREVIATION</span></span>
+<span></span>
+<span><span class="co">#COMPILE COUNTRY NAMES AND CODES INTO A NEW DATA FRAME</span></span>
+<span><span class="va">country_codes</span> <span class="op">=</span> <span class="fu">data.frame</span><span class="op">(</span>country <span class="op">=</span> <span class="fu">unique</span><span class="op">(</span><span class="va">gap</span><span class="op">$</span><span class="va">country</span><span class="op">)</span>, </span>
+<span>                           abbr <span class="op">=</span> <span class="va">country_abbrs</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">head</span><span class="op">(</span><span class="va">country_codes</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>      country abbr
+1 Afghanistan  AFG
+2     Albania  ALB
+3     Algeria  DZA
+4      Angola  AGO
+5   Argentina  ARG
+6   Australia  AUS</code></pre>
+</div>
+<p>The data set we just constructed, <code>country_codes</code>,
+contains <code>142</code> rows, one row per country found in our
+<code>gapminder</code> data set. Each row contains a country name in the
+<code>country</code> column and that country’s universally accepted
+three-letter country code in the <code>abbr</code> column.</p>
+<p>Now we can use <code>left_join()</code> to add that country code
+abbreviation data to our <code>gapminder</code> data set, which doesn’t
+already have it:</p>
+<div class="codewrapper sourceCode" id="cb52">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gap_joined</span> <span class="op">=</span> <span class="fu">left_join</span><span class="op">(</span><span class="va">gap</span>, <span class="va">country_codes</span>, <span class="co">#THE "LEFT" TABLE GOES FIRST, AND THE "RIGHT" TABLE GOES SECOND</span></span>
+<span>                       by <span class="op">=</span> <span class="st">"country"</span><span class="op">)</span> <span class="co">#WHAT COLUMNS ARE OUR KEY COLUMNS? </span></span>
+<span></span>
+<span><span class="fu">head</span><span class="op">(</span><span class="va">gap_joined</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>      country continent year lifeExp      pop gdpPercap abbr
+1 Afghanistan      Asia 1952  28.801  8425333  779.4453  AFG
+2 Afghanistan      Asia 1957  30.332  9240934  820.8530  AFG
+3 Afghanistan      Asia 1962  31.997 10267083  853.1007  AFG
+4 Afghanistan      Asia 1967  34.020 11537966  836.1971  AFG
+5 Afghanistan      Asia 1972  36.088 13079460  739.9811  AFG
+6 Afghanistan      Asia 1977  38.438 14880372  786.1134  AFG</code></pre>
+</div>
+<p>Here’s what happened in this join:</p>
+<ol style="list-style-type: decimal">
+<li><p>R looked at the left-hand table and found all the unique values
+in its key column, <code>country</code>.</p></li>
+<li><p>Then, for each unique value it found, it scanned the right-hand
+table’s key column (also called <code>country</code>) for matches. Does
+any row over here on the <em>right</em> contain a <code>country</code>
+value that matches the <code>country</code> value I’m looking for in the
+<em>left</em>-hand table?</p></li>
+<li><p>Whenever it found a match (<em>e.g.</em>, a left-hand row and a
+right-hand row were both found to contain <code>"Switzerland"</code>),
+then R asked “What stuff exists in the <em>right</em>-hand table’s row
+that isn’t <em>already</em> in the <em>left</em>-hand table’s
+row?”</p></li>
+<li><p>The non-redundant stuff was then copied over to the left-hand
+table’s row, making it wider. In this case, that was just the
+<code>abbr</code> column.</p></li>
+</ol>
+<p>While a <em>little</em> hard to wrap one’s head around, joins are a
+powerful way to bring multiple data structures together, provided they
+share <em>enough</em> information to link their rows meaningfully!</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -4747,7 +4953,6 @@ together into “paragraphs.”</li>
 <li>Remember that order matters when stringing together
 <code>dplyr</code> verbs!</li>
 </ul>
-</div>
 </div>
 </div>
 </div>
@@ -4910,7 +5115,7 @@ graph.</p></li>
 <p>The first of these is, arguably, the <em>most</em>
 essential—<em>nothing</em> will happen without it. Let’s see what it
 does:</p>
-<div class="codewrapper sourceCode" id="cb48">
+<div class="codewrapper sourceCode" id="cb54">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4943,7 +5148,7 @@ there can be no graph!</p>
 considering doing things the “non-standard” way sometimes.</p>
 <p>For now, let’s provide our <code>gapminder</code> data set to our
 <code>ggpl``ot()</code> call’s first parameter, <code>data</code>:</p>
-<div class="codewrapper sourceCode" id="cb49">
+<div class="codewrapper sourceCode" id="cb55">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4987,7 +5192,7 @@ us to use <strong>aesthetic = column name format</strong>.</p>
 (<code>gdpPercap</code>) on the x-axis versus its life expectancy
 (<code>lifeExp</code>) value on the y-axis. Here’s how we can do
 this:</p>
-<div class="codewrapper sourceCode" id="cb50">
+<div class="codewrapper sourceCode" id="cb56">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5021,7 +5226,7 @@ this call—<code>ggplot2</code> uniquely uses the <code>+</code> operator
 to add components to the same ggplot command, somewhat similar to how
 <code>dplyr</code> tacks multiple commands together into a single
 command with the pipe operator:</p>
-<div class="codewrapper sourceCode" id="cb51">
+<div class="codewrapper sourceCode" id="cb57">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5060,7 +5265,7 @@ life expectancy changes over time instead.</p>
 containing time data. We can swap that column in for
 <code>gdpPercap</code> for the x aesthetic inside of our
 <code>aes()</code> function to achieve this goal:</p>
-<div class="codewrapper sourceCode" id="cb52">
+<div class="codewrapper sourceCode" id="cb58">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5100,7 +5305,7 @@ according to <code>continent</code>.</p>
 <div class="accordion-body">
 <p>We can add a <code>color</code> input to our <code>aes()</code> call
 using <strong>aesthetic = column format</strong> like so:</p>
-<div class="codewrapper sourceCode" id="cb53">
+<div class="codewrapper sourceCode" id="cb59">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5135,7 +5340,7 @@ over time using a scatterplot, let’s change to a line graph instead.
 This drastic <em>conceptual</em> change requires only a small
 <em>coding</em> change; we swap <code>geom_point()</code> for
 <code>geom_line()</code>:</p>
-<div class="codewrapper sourceCode" id="cb54">
+<div class="codewrapper sourceCode" id="cb60">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5197,7 +5402,7 @@ line ber <code>country</code>), we can make this distinction using the
 <code>group</code> aesthetic. A ggplot will group according to the
 <code>group</code> aesthetic for every aesthetic not explicitly grouped
 in some other way:</p>
-<div class="codewrapper sourceCode" id="cb55">
+<div class="codewrapper sourceCode" id="cb61">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5213,7 +5418,7 @@ nuanced way to look at the data than what we had before.</p>
 one kind of cheese, you can also have a pizza featuring a blend of
 cheeses. Similarly, you can produce a ggplot with a blend of geoms.
 Let’s add points back to this graph to see this:</p>
-<div class="codewrapper sourceCode" id="cb56">
+<div class="codewrapper sourceCode" id="cb62">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5252,7 +5457,7 @@ of these aesthetics do?</p>
 <div class="accordion-body">
 <p><code>size</code> controls the size of the points plotted (the
 equivalent for lines is <code>linewidth</code>):</p>
-<div class="codewrapper sourceCode" id="cb57">
+<div class="codewrapper sourceCode" id="cb63">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5268,7 +5473,7 @@ This would now be called a <strong>bubble plot</strong>, and it’s one of
 my all-time favorite graph types!</p>
 <p>Meanwhile, <code>alpha</code> controls the <em>transparency</em> of
 elements, with lower values being more transparent:</p>
-<div class="codewrapper sourceCode" id="cb58">
+<div class="codewrapper sourceCode" id="cb64">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5313,7 +5518,7 @@ relate to the two ways we can map aesthetics:</p>
 achieve our desired outcome is to do the second. Inside
 <code>geom_point()</code>, we could set the color aesthetic to the
 constant value <code>"black"</code>:</p>
-<div class="codewrapper sourceCode" id="cb59">
+<div class="codewrapper sourceCode" id="cb65">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5355,7 +5560,7 @@ want <code>color</code>s to be mapped to <code>continent</code>s for
 <em>only</em> our lines, we could instead map the <code>color</code>
 aesthetic to <code>continent</code>s just inside
 <code>geom_line(),</code> like this:</p>
-<div class="codewrapper sourceCode" id="cb60">
+<div class="codewrapper sourceCode" id="cb66">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5408,7 +5613,7 @@ want each slice of our pizza to be a different experience!</p>
 <p>There’s another key <code>ggplot2</code> concept to learn at this
 stage. Compare the graph above to the one produced by the code
 below:</p>
-<div class="codewrapper sourceCode" id="cb61">
+<div class="codewrapper sourceCode" id="cb67">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5483,7 +5688,7 @@ Because the x axis is mapped to continuous data, we can use the
 <code>scale_x_continuous()</code> function to adjust its appearance.
 This function’s first parameter, <code>name</code>, is the name we want
 to use for this axis’ title:</p>
-<div class="codewrapper sourceCode" id="cb62">
+<div class="codewrapper sourceCode" id="cb68">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5517,7 +5722,7 @@ capital letter makes a difference!</p>
 <p>Our <code>y</code> data are also continuous, so we can use the
 <code>scale_y_continuous()</code> function to adjust this axis’
 title:</p>
-<div class="codewrapper sourceCode" id="cb63">
+<div class="codewrapper sourceCode" id="cb69">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5538,7 +5743,7 @@ have to use a <code>scale_color_*()</code> function this time. Also,
 this aesthetic is mapped to grouping (or categorical, or
 <strong>discrete</strong>) data, so we’ll need to use the
 <code>scale_color_discrete()</code> function:</p>
-<div class="codewrapper sourceCode" id="cb64">
+<div class="codewrapper sourceCode" id="cb70">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5556,7 +5761,7 @@ labels, axis limits, legend keys, colors, and more.</p>
 the graph? I personally find that gap unattractive. We can eliminate it
 by first expanding the <strong>limits</strong> of the x-axis out to
 2010:</p>
-<div class="codewrapper sourceCode" id="cb65">
+<div class="codewrapper sourceCode" id="cb71">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5572,7 +5777,7 @@ by first expanding the <strong>limits</strong> of the x-axis out to
 makes the problem worse! However, we can then add a set of custom
 <strong>breaks</strong> to tell R exactly where it <em>should</em> put
 labels on the x-axis:</p>
-<div class="codewrapper sourceCode" id="cb66">
+<div class="codewrapper sourceCode" id="cb72">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5591,7 +5796,7 @@ labels on the x-axis:</p>
 <code>labels</code> parameter can additionally affect what they
 <em>say</em>, including making them text instead of numbers. So, we
 could do something kind of wild like this:</p>
-<div class="codewrapper sourceCode" id="cb67">
+<div class="codewrapper sourceCode" id="cb73">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5607,7 +5812,7 @@ could do something kind of wild like this:</p>
 </div>
 <figure><img src="fig/exploring-the-tidyverse-rendered-breaks%20two-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>There are so many more things that each <code>scale_*()</code>
 function can do! Check their help pages for more details:</p>
-<div class="codewrapper sourceCode" id="cb68">
+<div class="codewrapper sourceCode" id="cb74">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5616,7 +5821,7 @@ function can do! Check their help pages for more details:</p>
 <p>As one final example, note that we can also use
 <code>scale_color_discrete()</code> to specify new colors for our graph
 to use for its <code>continent</code> groupings:</p>
-<div class="codewrapper sourceCode" id="cb69">
+<div class="codewrapper sourceCode" id="cb75">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5656,7 +5861,7 @@ of <code>theme()</code>, the major grid lines are controlled by the
 <code>panel.grid.major</code> parameter, and, to remove an element like
 these from a graph, we can assign its parameter a call to the
 <code>element_blank()</code> function:</p>
-<div class="codewrapper sourceCode" id="cb70">
+<div class="codewrapper sourceCode" id="cb76">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5673,7 +5878,7 @@ these from a graph, we can assign its parameter a call to the
 </div>
 <figure><img src="fig/exploring-the-tidyverse-rendered-blank-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>…Unfortunately, ggplots come with both <em>major</em> and
 <em>minor</em> grid lines, so we have to eliminate the latter also:</p>
-<div class="codewrapper sourceCode" id="cb71">
+<div class="codewrapper sourceCode" id="cb77">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5692,7 +5897,7 @@ these from a graph, we can assign its parameter a call to the
 <figure><img src="fig/exploring-the-tidyverse-rendered-blank2-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Alternatively, the major and minor grid lines are also jointly
 controlled by the <code>panel.grid</code> parameter—setting this one to
 <code>element_blank()</code> would remove both at once:</p>
-<div class="codewrapper sourceCode" id="cb72">
+<div class="codewrapper sourceCode" id="cb78">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5715,7 +5920,7 @@ elements (such as all the axis lines at once).</p>
 in the graph, we can use the <code>text</code> parameter. Because all
 the text in our graph is, well, text, we modify it by using the
 <code>element_text()</code> function:</p>
-<div class="codewrapper sourceCode" id="cb73">
+<div class="codewrapper sourceCode" id="cb79">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5744,7 +5949,7 @@ vision!</p>
 title text and also make it bold, we could again use
 <code>element_text()</code> but target the <code>axis.title</code>
 parameter, which targets just those two text boxes and no others:</p>
-<div class="codewrapper sourceCode" id="cb75">
+<div class="codewrapper sourceCode" id="cb81">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5765,7 +5970,7 @@ parameter, which targets just those two text boxes and no others:</p>
 Because that’s a rectangle, we can control it using the
 <code>element_rect()</code> function, and the parameter in charge of
 that rectangle is <code>panel.background</code>:</p>
-<div class="codewrapper sourceCode" id="cb76">
+<div class="codewrapper sourceCode" id="cb82">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5788,7 +5993,7 @@ no x- and y-axis lines. Let’s add some! Because those lines are, well,
 <em>lines</em>, we can control those using the
 <code>element_line()</code> function, and the parameter in control of
 both lines together is <code>axis.line</code>:</p>
-<div class="codewrapper sourceCode" id="cb77">
+<div class="codewrapper sourceCode" id="cb83">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5827,7 +6032,7 @@ but you <em>would</em> prefer to have major x-axis grid lines for
 <em>this</em> graph, you could apply your general theme first and then
 add a second <code>theme()</code> call that contains the specific
 adjustment you want to make:</p>
-<div class="codewrapper sourceCode" id="cb78">
+<div class="codewrapper sourceCode" id="cb84">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5862,7 +6067,7 @@ panel per group.</p>
 <p>For example, here’s how we could use the <code>facet_wrap()</code>
 function to create five sub-panels of our graph, with each continent now
 getting its own panel:</p>
-<div class="codewrapper sourceCode" id="cb79">
+<div class="codewrapper sourceCode" id="cb85">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5908,7 +6113,7 @@ graph rather than writing code to have R do it for you.</p>
 <p>The second option is to use R’s built-in image-exporting functions.
 For example, if you want to save a specific graph as a <code>.png</code>
 file, you could do the following:</p>
-<div class="codewrapper sourceCode" id="cb80">
+<div class="codewrapper sourceCode" id="cb86">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5929,7 +6134,7 @@ function works similarly to the approach above in that you can specify a
 resolution. You can also pick a wide range of output file types, which
 you specify just through the <code>filename</code> you provide in the
 call:</p>
-<div class="codewrapper sourceCode" id="cb81">
+<div class="codewrapper sourceCode" id="cb87">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6105,14 +6310,13 @@ format</strong>.</p>
 numbers of points, assists, and rebounds each team earned in their most
 recent game. You could store the exact same data in two very different
 ways:</p>
-<figure><img src="https://www.statology.org/wp-content/uploads/2021/12/wideLong1-1.png" alt="When data are in a wide format (left-hand side above), groups within the data (such as teams) have their own rows, and everything we know about each group (such as stats) is listed in different columns in that group's row. When data are in long format (right-hand side above), each individual row belongs to a single observation, i.e one datum (such as one particular record of one statistic) and columns instead hold information about what groups each statistic belongs to. Same data, different organizations!" class="figure mx-auto d-block"><div class="figcaption">When data are in <strong>wide format</strong>
-(left-hand side above), <em>groups</em> within the data (such as teams)
-have their own rows, and everything we know about each <em>group</em>
-(such as their different stats) is listed in different columns in that
-group’s row. When data are in <strong>long format</strong> (right-hand
-side above), each individual row belongs to a <em>single
-observation</em> (such as one particular record of one statistic for one
-team) and columns instead hold information about what groups each
+<figure><img src="https://www.statology.org/wp-content/uploads/2021/12/wideLong1-1.png" alt="When data are in a wide format (left-hand side above), groups within the data (such as teams) have their own rows, and everything we know about each group (such as stats) is listed in different columns in that group’s row. When data are in long format (right-hand side above), each individual row belongs to a single observation, i.e one datum (such as one particular record of one statistic) and columns instead hold information about what groups each statistic belongs to. Same data, different organizations!" class="figure mx-auto d-block"><div class="figcaption">When data are in a wide format (left-hand side
+above), groups within the data (such as teams) have their own rows, and
+everything we know about each group (such as stats) is listed in
+different columns in that group’s row. When data are in long format
+(right-hand side above), each individual row belongs to a single
+observation, i.e one datum (such as one particular record of one
+statistic) and columns instead hold information about what groups each
 statistic belongs to. Same data, different organizations!</div>
 </figure><p>In “wide” format, each row is usually a grouping, site, or individual
 for which multiple observations were recorded, and each column is
@@ -6159,7 +6363,7 @@ the “long” format data set?</p>
 calculate “points per rebound” for each team would be easy because the
 two values for each team (<code>Points</code> and <code>Rebounds</code>)
 are in the same row. So, we’d do something like this:</p>
-<div class="codewrapper sourceCode" id="cb82">
+<div class="codewrapper sourceCode" id="cb88">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6176,7 +6380,7 @@ leveraging data being stored more “widely.”</p>
 <code>Assists</code> across all teams would be easy because all the
 numbers we’re trying to smash together are in the same <em>column</em>.
 So, we’d do something like this:</p>
-<div class="codewrapper sourceCode" id="cb83">
+<div class="codewrapper sourceCode" id="cb89">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6200,7 +6404,7 @@ for each member of a group (or if you have no groups to group by!).</p>
 There are numbers in the <code>Value</code> column we’d need to avoid
 here to calculate our average. So, it’d require us to use
 <code>filter()</code> first to remove these:</p>
-<div class="codewrapper sourceCode" id="cb84">
+<div class="codewrapper sourceCode" id="cb90">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6263,7 +6467,7 @@ needs. And there is: The <code>tidyr</code> package’s functions
 <div class="callout-content">
 <p>Let’s take another good look at the <code>gapminder</code> data set
 to remind ourselves of its structure:</p>
-<div class="codewrapper sourceCode" id="cb85">
+<div class="codewrapper sourceCode" id="cb91">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6364,7 +6568,7 @@ column in a given row. We’ll call this new column
 <code>names_to</code> <strong>parameter</strong>.</p></li>
 </ol>
 <p>Let’s put all this together and see what it looks like!</p>
-<div class="codewrapper sourceCode" id="cb87">
+<div class="codewrapper sourceCode" id="cb93">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6449,7 +6653,7 @@ when you see it!). We’ll provide this as an input to the
 names of the new columns from this old column’s name.”</li>
 </ol>
 <p>Let’s see what this looks like:</p>
-<div class="codewrapper sourceCode" id="cb89">
+<div class="codewrapper sourceCode" id="cb95">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6515,7 +6719,7 @@ set.</p>
 should pull the names for the new columns in our wider table from the
 <code>Statistic</code> column, then pull the values for those new
 columns from the old <code>Value</code> column:</p>
-<div class="codewrapper sourceCode" id="cb91">
+<div class="codewrapper sourceCode" id="cb97">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6579,7 +6783,7 @@ there.</li>
 <div class="accordion-body">
 <p>Here’s how we’d use <code>pivot_longer()</code> to “rewind” to our
 original data set:</p>
-<div class="codewrapper sourceCode" id="cb93">
+<div class="codewrapper sourceCode" id="cb99">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6622,6 +6826,114 @@ huh??</p>
 </div>
 </div>
 </div>
+</section><section><h2 class="section-heading" id="bonus-separate_-and-unite">Bonus: <code>separate_*()</code> and <code>unite()</code>
+<a class="anchor" aria-label="anchor" href="#bonus-separate_-and-unite"></a>
+</h2>
+<hr class="half-width">
+<p>One of the reasons <code>tidyr</code> is such a useful package is
+that it introduces easy <strong>pivoting</strong> to R, an operation
+many researchers instead use non-coding-based programs like Microsoft
+Excel to perform. While we’re on the subject of <code>tidyr</code>, we
+thought we’d mention two other <code>tidyr</code> functions that can do
+things you might otherwise do in Excel.</p>
+<p>The first of these functions is <code>unite()</code>. It’s common to
+want to take multiple columns and glue their contents together into a
+single column’s worth of values (in Excel, this is called
+<strong>concatenation</strong>).</p>
+<p>For example, maybe you’d rather have a column of country names with
+the relevant continent tacked on via underscores (<em>e.g.</em>,
+<code>"Albania_Europe"</code>).</p>
+<p>You could produce such a column already using <code>dplyr</code>’s
+<code>mutate()</code> function combined with R’s <code>paste0()</code>
+function, which pastes together a mixture of values and text into a
+single text value:</p>
+<div class="codewrapper sourceCode" id="cb101">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gap</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>new_col <span class="op">=</span> <span class="fu">paste0</span><span class="op">(</span><span class="va">country</span>, </span>
+<span>                          <span class="st">"_"</span>,</span>
+<span>                          <span class="va">continent</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">new_col</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">head</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>           new_col
+1 Afghanistan_Asia
+2 Afghanistan_Asia
+3 Afghanistan_Asia
+4 Afghanistan_Asia
+5 Afghanistan_Asia
+6 Afghanistan_Asia</code></pre>
+</div>
+<p>However, this is approach is a <em>little</em> clunky.
+<code>unite()</code> can do this same operation more cleanly and
+clearly:</p>
+<div class="codewrapper sourceCode" id="cb103">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gap</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">unite</span><span class="op">(</span>col <span class="op">=</span> <span class="st">"new_col"</span>, <span class="co">#NAME NEW COLUMN</span></span>
+<span>        <span class="fu">c</span><span class="op">(</span><span class="va">country</span>, <span class="va">continent</span><span class="op">)</span>, <span class="co">#COLUMNS TO COMBINE</span></span>
+<span>        sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#HOW TO SEPARATE THE ORIGINAL VALUES, IF AT ALL.</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">new_col</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">head</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>           new_col
+1 Afghanistan_Asia
+2 Afghanistan_Asia
+3 Afghanistan_Asia
+4 Afghanistan_Asia
+5 Afghanistan_Asia
+6 Afghanistan_Asia</code></pre>
+</div>
+<p>Just as often, we want to break a single column’s contents apart
+across multiple new columns. For example, maybe we want to split our
+four-digit year data in two columns: one for the first two digits and
+one for the last two (<em>e.g.</em>, <code>1975</code> becomes
+<code>19</code> and <code>75</code>).</p>
+<p>In Excel, you might use the “Text to Columns” functionality to split
+a column apart like this, either at a certain number of characters or at
+a certain <strong>delimiter</strong>, such as a space, a comma, or an
+underscore.</p>
+<p>In <code>tidyr</code>, we can use the <code>separate_*()</code>
+family of functions to do this. <code>separate_wider_delim()</code> will
+break one column into two (or more) based on a specific delimiter,
+whereas <code>separate_wider_position()</code> will break one column
+into two (or more) based on a number of characters, which is what we
+want to do here:</p>
+<div class="codewrapper sourceCode" id="cb105">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gap</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">separate_wider_position</span><span class="op">(</span>cols <span class="op">=</span> <span class="va">year</span>, <span class="co">#COLUMN(S) TO SPLIT</span></span>
+<span>                          widths <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"decades"</span> <span class="op">=</span> <span class="fl">2</span>, <span class="st">"years"</span> <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#NEW COLUMNS: "NAMES" = NUMBER OF CHARACTERS </span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">decades</span>, <span class="va">years</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">head</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># A tibble: 6 × 2
+  decades years
+  &lt;chr&gt;   &lt;chr&gt;
+1 19      52
+2 19      57
+3 19      62
+4 19      67
+5 19      72
+6 19      77   </code></pre>
+</div>
+<p>Performing operations like these in R instead of in Excel makes them
+more reproducible!</p>
 <div id="keypoints3" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -6645,7 +6957,7 @@ layout.</li>
 </div>
 </section></section><section id="aio-07b-control-flow"><p>Content from <a href="07b-control-flow.html">Control Flow--if() and for()</a></p>
 <hr>
-<p>Last updated on 2024-09-11 |
+<p>Last updated on 2024-09-12 |
 
         <a href="https://github.com/swcarpentry/r-novice-gapminder/edit/main/episodes/07b-control-flow.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -6877,7 +7189,7 @@ fails)–what could you do in this situation?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Your first temptation might be to put multiple <code>if()</code>s in
 a row to catch all possible outcomes, such as by using the two
@@ -6972,7 +7284,7 @@ set up earlier, do you think?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>Recall that we want the value in column <code>c</code> to be equal to
 <code>1</code> only <em>if</em> two specific conditions are met. So, we
@@ -7015,7 +7327,7 @@ against two rules instead of just one.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Here’s what this could look like:</p>
 <div class="codewrapper sourceCode" id="cb15">
@@ -7199,7 +7511,7 @@ challenge, do you think?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>To fill out all 10,000 rows of our <code>c</code> column, we need to
 do the same check <em>for each row</em>. Again, we can’t even discuss
@@ -7387,7 +7699,7 @@ the two tests.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>Here’s one valid way to do this, though there are others! Don’t
 forget to preallocate column <code>d</code> first!</p>
@@ -7427,7 +7739,7 @@ the fly for you with respect to what operations it should do.</li>
 </div>
 </section></section><section id="aio-09-vectorization"><p>Content from <a href="09-vectorization.html">Vectorization</a></p>
 <hr>
-<p>Last updated on 2024-09-11 |
+<p>Last updated on 2024-09-12 |
 
         <a href="https://github.com/swcarpentry/r-novice-gapminder/edit/main/episodes/09-vectorization.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -8010,7 +8322,7 @@ length</code></pre>
 </div>
 </div></section><section id="aio-10-functions"><p>Content from <a href="10-functions.html">Functions Explained</a></p>
 <hr>
-<p>Last updated on 2024-09-11 |
+<p>Last updated on 2024-09-12 |
 
         <a href="https://github.com/swcarpentry/r-novice-gapminder/edit/main/episodes/10-functions.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -8835,8 +9147,8 @@ R.</li>
   "url": "https://swcarpentry.github.io/r-novice-gapminder/aio.html",
   "identifier": "https://swcarpentry.github.io/r-novice-gapminder/aio.html",
   "dateCreated": "2015-04-18",
-  "dateModified": "2024-09-11",
-  "datePublished": "2024-09-11"
+  "dateModified": "2024-09-12",
+  "datePublished": "2024-09-12"
 }
 
   </script><script>

@@ -808,6 +808,121 @@ So, when we then summarized that grouped data frame, R calculated summaries for 
 :::
 :::
 
+## Bonus: Joins
+
+It's common to store related data in several, smaller tables rather than together in one large table, especially if the data are of different lengths or come from different sources.
+
+However, it may sometimes be convenient, or even necessary, to pull these related data together into one data set to analyze or graph them.
+
+When we combine together multiple, smaller tables of data into a single larger table, that's called a **join**. Joins are a straightforward operation for computers to perform, but they can be tricky for humans to conceptualize, in part because they can take so many forms:
+
+![A diagram showing the most common types of joins. On the top are two small data tables (a "left" table in blue and a "right" table in green). A left join keeps all the rows in the left-hand table and adds any matching data to those rows found in the right-hand table (any missing data implied by the join gets marked as NAs). A right join does the opposite, keeping only all the rows in the right-hand table. An inner join will only keep rows that have a match in both tables, and a full join will keep all rows from either table whether they had a match or not. A "match" is determined by whether or not the values in **key columns** (here, the two ID columns) match between the left-hand and right-hand tables. In this example, row 2 of the left table and row 1 of the right table match because they have the same ID value, so all joins will unite the data in these two rows in the product.](fig/sjo3s5mm.png)
+
+Here are the key ideas behind a join:
+
+-   A join occurs between two tables: a **"left" table** and a **"right" table**. They're called this just because we *have* to specify them in *some* order in our join command, so one will, by necessity, be to the "left" of the other.
+
+-   The goal of a join is (usually) to make a "bigger" table by uniting related data found across the two smaller tables in some way. We'll do that by:
+
+    -   Adding data from one table onto *existing* rows of the other table, making the receiving table wider (this is the idea behind **left** and **right joins**), or, in addition, by
+
+    -   Adding *whole rows* from one table to the other table that were "new" to the receiving table (that's the idea behind a **full join**).
+
+-   The exception is an **inner join**. An inner join will *usually* result in a smaller final table because we only keep, in the end, rows that had matches in both tables. Records that fail to match are eliminated.
+
+-   But, wait, how do we know if data in one table "matches" data in another table and thus should be joined?
+
+    -   Well, because data found in the same row of a data set are usually related (they're from the same country, person, group, *etc*.), relatedness is a "rowwise" question. We ask "which row(s) in *this* table are related to which row(s) in *that* table?"
+
+    -   Because computers can't "guess" about relatedness, relatedness has to be explicit for a join to work: for rows to be considered related, they have to have matching values for one or more sets of **key columns**.
+
+    -   For example, in the picture above, consider the `ID` column that exists in *both* tables. If the `ID` columns were our **key columns**, row 1 in the left table, with its `ID` value of `1`, would have no matching row in the right table (there is no row in that table with an `ID` value of `1` also). Thus, there is no new info in the right-hand table that could be added to the left-hand table for this row.
+
+        -   By contrast, row 2 in the left table, with its `ID` value of `2`, *does* have a matching row in the right-hand table because its first row also has an `ID` value of `2`. Thus, we *could* combine these two rows in some way, either by adding new information from the right-hand table's row to the left-hand table's row or *vice versa*.
+
+An analogy that might make this make relatable is to think of joins like combining jigsaw puzzle pieces. We can only connect together two puzzle pieces into something larger if they have corresponding "connectors;" matching key-column values are those connectors in a join.
+
+Joins are a *very* powerful data manipulation—one many users might otherwise have to perform in a language such as SQL. However, `dplyr` possesses a full suite of joining functions, including `left_join()` and `right_join()`, `full_join()`, and `inner_join()`, to allow R users to perform joins with ease.
+
+Because a left join is the easiest form to explain and is also the most commonly performed type of join, let's use `dplyr`'s `left_join()` function to add new information to every row of the `gapminder` data set.
+
+We'll do this by *first* retrieving a new data set that *also* possesses a column containing country names—this column and the `country` column in our `gapminder` data set will be our **key columns**; R will use them to figure out which rows across the two data sets are related (*i.e.*, they'll share the same values in their `country` columns).
+
+We can make such a data set using the `countrycode` package, so let's install that package (if you don't already have it), turn it on, and check it out:
+
+
+``` r
+install.packages("countrycode") #ONLY RUN ONCE, ONLY IF YOU DON'T ALREADY HAVE THIS PACKAGE
+```
+
+``` output
+The following package(s) will be installed:
+- countrycode [1.6.0]
+These packages will be installed into "~/work/r-novice-gapminder/r-novice-gapminder/renv/profiles/lesson-requirements/renv/library/linux-ubuntu-jammy/R-4.4/x86_64-pc-linux-gnu".
+
+# Installing packages --------------------------------------------------------
+- Installing countrycode ...                    OK [linked from cache]
+Successfully installed 1 package in 5.6 milliseconds.
+```
+
+``` r
+library(countrycode) #TURN ON THIS PACKAGE'S TOOLS
+
+country_abbrs = countrycode(unique(gap$country), #LOOK UP ALL THE DIFFERENT GAPMINDER COUNTRIES IN THE countrycode DATABASE
+            "country.name", #FIND EACH COUNTRY'S NAME IN THIS DATABASE'S country.name COLUMN
+            "iso3c") #RETRIEVE EACH COUNTRY'S 3-LETTER ABBREVIATION
+
+#COMPILE COUNTRY NAMES AND CODES INTO A NEW DATA FRAME
+country_codes = data.frame(country = unique(gap$country), 
+                           abbr = country_abbrs)
+
+head(country_codes)
+```
+
+``` output
+      country abbr
+1 Afghanistan  AFG
+2     Albania  ALB
+3     Algeria  DZA
+4      Angola  AGO
+5   Argentina  ARG
+6   Australia  AUS
+```
+
+The data set we just constructed, `country_codes`, contains `142` rows, one row per country found in our `gapminder` data set. Each row contains a country name in the `country` column and that country's universally accepted three-letter country code in the `abbr` column.
+
+Now we can use `left_join()` to add that country code abbreviation data to our `gapminder` data set, which doesn't already have it:
+
+
+``` r
+gap_joined = left_join(gap, country_codes, #THE "LEFT" TABLE GOES FIRST, AND THE "RIGHT" TABLE GOES SECOND
+                       by = "country") #WHAT COLUMNS ARE OUR KEY COLUMNS? 
+
+head(gap_joined)
+```
+
+``` output
+      country continent year lifeExp      pop gdpPercap abbr
+1 Afghanistan      Asia 1952  28.801  8425333  779.4453  AFG
+2 Afghanistan      Asia 1957  30.332  9240934  820.8530  AFG
+3 Afghanistan      Asia 1962  31.997 10267083  853.1007  AFG
+4 Afghanistan      Asia 1967  34.020 11537966  836.1971  AFG
+5 Afghanistan      Asia 1972  36.088 13079460  739.9811  AFG
+6 Afghanistan      Asia 1977  38.438 14880372  786.1134  AFG
+```
+
+Here's what happened in this join:
+
+1.  R looked at the left-hand table and found all the unique values in its key column, `country`.
+
+2.  Then, for each unique value it found, it scanned the right-hand table's key column (also called `country`) for matches. Does any row over here on the *right* contain a `country` value that matches the `country` value I'm looking for in the *left*-hand table?
+
+3.  Whenever it found a match (*e.g.*, a left-hand row and a right-hand row were both found to contain `"Switzerland"`), then R asked "What stuff exists in the *right*-hand table's row that isn't *already* in the *left*-hand table's row?"
+
+4.  The non-redundant stuff was then copied over to the left-hand table's row, making it wider. In this case, that was just the `abbr` column.
+
+While a *little* hard to wrap one's head around, joins are a powerful way to bring multiple data structures together, provided they share *enough* information to link their rows meaningfully!
+
 ::: keypoints
 -   Use the `dplyr` package to manipulate data frames in efficient, clear, and intuitive ways.
 -   Use `select()` to retain specific columns when creating subsetted data frames.
@@ -898,7 +1013,7 @@ So, we need to provide data as inputs to our ggplot command *somehow*. We actual
 
 For this lesson, we'll *always* add our data via `ggplot()`, but, later, I'll mention why you *might* considering doing things the "non-standard" way sometimes.
 
-For now, let's provide our `gapminder` data set to our `ggpl``ot()` call's first parameter, `data`:
+For now, let's provide our `gapminder` data set to our ``` ggpl``ot() ``` call's first parameter, `data`:
 
 
 ``` r
@@ -1603,7 +1718,7 @@ That said, from a *computing* standpoint, there are two broad ways to think abou
 
 Imagine you had stats from several basketball teams, include the numbers of points, assists, and rebounds each team earned in their most recent game. You could store the exact same data in two very different ways:
 
-![When data are in **wide format** (left-hand side above), *groups* within the data (such as teams) have their own rows, and everything we know about each *group* (such as their different stats) is listed in different columns in that group's row. When data are in **long format** (right-hand side above), each individual row belongs to a *single observation* (such as one particular record of one statistic for one team) and columns instead hold information about what groups each statistic belongs to. Same data, different organizations!](https://www.statology.org/wp-content/uploads/2021/12/wideLong1-1.png){alt="When data are in a wide format (left-hand side above), groups within the data (such as teams) have their own rows, and everything we know about each group (such as stats) is listed in different columns in that group's row. When data are in long format (right-hand side above), each individual row belongs to a single observation, i.e one datum (such as one particular record of one statistic) and columns instead hold information about what groups each statistic belongs to. Same data, different organizations!"}
+![When data are in a wide format (left-hand side above), groups within the data (such as teams) have their own rows, and everything we know about each group (such as stats) is listed in different columns in that group's row. When data are in long format (right-hand side above), each individual row belongs to a single observation, i.e one datum (such as one particular record of one statistic) and columns instead hold information about what groups each statistic belongs to. Same data, different organizations!](https://www.statology.org/wp-content/uploads/2021/12/wideLong1-1.png)
 
 In "wide" format, each row is usually a grouping, site, or individual for which multiple observations were recorded, and each column is everything you know about that entity, perhaps at several different times.
 
@@ -1862,6 +1977,87 @@ So, R pulled apart the old column names, creating `pop`, `lifeExp`, and `gdpPerc
 Try to rephrase the above explanation in your own words!
 :::
 :::
+
+## Bonus: `separate_*()` and `unite()`
+
+One of the reasons `tidyr` is such a useful package is that it introduces easy **pivoting** to R, an operation many researchers instead use non-coding-based programs like Microsoft Excel to perform. While we're on the subject of `tidyr`, we thought we'd mention two other `tidyr` functions that can do things you might otherwise do in Excel.
+
+The first of these functions is `unite()`. It's common to want to take multiple columns and glue their contents together into a single column's worth of values (in Excel, this is called **concatenation**).
+
+For example, maybe you'd rather have a column of country names with the relevant continent tacked on via underscores (*e.g.*, `"Albania_Europe"`).
+
+You could produce such a column already using `dplyr`'s `mutate()` function combined with R's `paste0()` function, which pastes together a mixture of values and text into a single text value:
+
+
+``` r
+gap %>% 
+  mutate(new_col = paste0(country, 
+                          "_",
+                          continent)) %>% 
+  select(new_col) %>% 
+  head()
+```
+
+``` output
+           new_col
+1 Afghanistan_Asia
+2 Afghanistan_Asia
+3 Afghanistan_Asia
+4 Afghanistan_Asia
+5 Afghanistan_Asia
+6 Afghanistan_Asia
+```
+
+However, this is approach is a *little* clunky. `unite()` can do this same operation more cleanly and clearly:
+
+
+``` r
+gap %>% 
+  unite(col = "new_col", #NAME NEW COLUMN
+        c(country, continent), #COLUMNS TO COMBINE
+        sep = "_") %>% #HOW TO SEPARATE THE ORIGINAL VALUES, IF AT ALL.
+  select(new_col) %>% 
+  head()
+```
+
+``` output
+           new_col
+1 Afghanistan_Asia
+2 Afghanistan_Asia
+3 Afghanistan_Asia
+4 Afghanistan_Asia
+5 Afghanistan_Asia
+6 Afghanistan_Asia
+```
+
+Just as often, we want to break a single column's contents apart across multiple new columns. For example, maybe we want to split our four-digit year data in two columns: one for the first two digits and one for the last two (*e.g.*, `1975` becomes `19` and `75`).
+
+In Excel, you might use the "Text to Columns" functionality to split a column apart like this, either at a certain number of characters or at a certain **delimiter**, such as a space, a comma, or an underscore.
+
+In `tidyr`, we can use the `separate_*()` family of functions to do this. `separate_wider_delim()` will break one column into two (or more) based on a specific delimiter, whereas `separate_wider_position()` will break one column into two (or more) based on a number of characters, which is what we want to do here:
+
+
+``` r
+gap %>% 
+  separate_wider_position(cols = year, #COLUMN(S) TO SPLIT
+                          widths = c("decades" = 2, "years" = 2)) %>% #NEW COLUMNS: "NAMES" = NUMBER OF CHARACTERS 
+  select(decades, years) %>% 
+  head()
+```
+
+``` output
+# A tibble: 6 × 2
+  decades years
+  <chr>   <chr>
+1 19      52   
+2 19      57   
+3 19      62   
+4 19      67   
+5 19      72   
+6 19      77   
+```
+
+Performing operations like these in R instead of in Excel makes them more reproducible!
 
 ::: keypoints
 -   Use the `tidyr` package to reshape the organization of your data.

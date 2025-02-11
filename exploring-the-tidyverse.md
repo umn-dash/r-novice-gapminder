@@ -34,7 +34,7 @@ These packages will be installed into "~/work/r-novice-gapminder/r-novice-gapmin
 
 # Installing packages --------------------------------------------------------
 - Installing gapminder ...                      OK [linked from cache]
-Successfully installed 1 package in 6.2 milliseconds.
+Successfully installed 1 package in 6 milliseconds.
 ```
 
 ``` r
@@ -862,7 +862,7 @@ These packages will be installed into "~/work/r-novice-gapminder/r-novice-gapmin
 
 # Installing packages --------------------------------------------------------
 - Installing countrycode ...                    OK [linked from cache]
-Successfully installed 1 package in 5.1 milliseconds.
+Successfully installed 1 package in 5.3 milliseconds.
 ```
 
 ``` r

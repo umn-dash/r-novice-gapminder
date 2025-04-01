@@ -34,7 +34,7 @@ These packages will be installed into "~/work/r-novice-gapminder/r-novice-gapmin
 
 # Installing packages --------------------------------------------------------
 - Installing gapminder ...                      OK [linked from cache]
-Successfully installed 1 package in 7.4 milliseconds.
+Successfully installed 1 package in 5.2 milliseconds.
 ```
 
 ``` r
@@ -856,13 +856,17 @@ install.packages("countrycode") #ONLY RUN ONCE, ONLY IF YOU DON'T ALREADY HAVE T
 ```
 
 ``` output
+# Downloading packages -------------------------------------------------------
+- Downloading countrycode from https://packagemanager.posit.co/cran/__linux__/jammy/latest ... OK [1.2 Mb in 0.28s]
+Successfully downloaded 1 package in 0.49 seconds.
+
 The following package(s) will be installed:
 - countrycode [1.6.0]
 These packages will be installed into "~/work/r-novice-gapminder/r-novice-gapminder/renv/profiles/lesson-requirements/renv/library/linux-ubuntu-jammy/R-4.4/x86_64-pc-linux-gnu".
 
 # Installing packages --------------------------------------------------------
-- Installing countrycode ...                    OK [linked from cache]
-Successfully installed 1 package in 6.5 milliseconds.
+- Installing countrycode ...                    OK [installed binary and cached in 0.17s]
+Successfully installed 1 package in 0.2 seconds.
 ```
 
 ``` r
